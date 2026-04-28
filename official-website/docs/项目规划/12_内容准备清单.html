@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网内容准备清单</title>
+  <style>
+    :root {
+      --bg: #f5f8f6; --text: #1f2a24; --muted: #5b6c63; --primary: #1f6745;
+      --soft: #edf7f0; --border: #d7e4dc; --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top left, #e5f3ea 0, transparent 34%), radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%), var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1360px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; position: sticky; top: 0; z-index: 10;
+      background: rgba(245, 248, 246, 0.92); backdrop-filter: blur(8px); padding: 10px 0 6px;
+    }
+    .nav a { text-decoration: none; color: var(--primary); background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 8px 14px; font-size: 14px; }
+    .nav a.current { color: #fff; background: var(--primary); border-color: var(--primary); }
+    .hero { background: linear-gradient(135deg, #1f6b46, #2f8f57); color: #fff; border-radius: 26px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 18px; }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; max-width: 1040px; line-height: 1.85; font-size: 15px; opacity: 0.95; }
+    .section { background: #fff; border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow); padding: 22px; margin-bottom: 16px; }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid var(--border); padding: 12px 14px; text-align: left; vertical-align: top; font-size: 14px; line-height: 1.75; }
+    th { background: var(--soft); color: var(--primary); font-weight: 700; }
+    td { color: var(--muted); }
+    .note { background: #edf7f0; border: 1px solid #d1e7d8; border-radius: 18px; padding: 18px; color: var(--primary); line-height: 1.8; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a class="current" href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网内容准备清单</h1>
+      <p>
+        官网项目最常见的卡点不是开发，而是内容与素材不足。本清单按页面与素材类型拆分，帮助业务、品牌和运营团队并行准备内容，避免上线前集中补资料。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>页面内容准备项</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">页面</th>
+            <th style="width: 34%;">需要准备的内容</th>
+            <th style="width: 16%;">优先级</th>
+            <th style="width: 14%;">建议责任方</th>
+            <th style="width: 16%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>首页</td><td>品牌主标题、品牌副标题、核心数据、业务方向简介、首页案例摘要、联系入口文案</td><td>P0</td><td>业务 + 品牌</td><td>优先完成</td></tr>
+          <tr><td>关于我们</td><td>公司简介、发展历程、资质说明、合作客户、企业文化</td><td>P0</td><td>业务 + 行政</td><td>中英文都要准备</td></tr>
+          <tr><td>产品中心</td><td>产品分类、工艺名称、材质说明、颜色说明、性能描述、应用场景、常见问题</td><td>P0</td><td>业务 + 工程</td><td>需结构化</td></tr>
+          <tr><td>解决方案</td><td>行业痛点、推荐工艺、典型部件、方案优势、案例关联文案</td><td>P0</td><td>业务 + 销售</td><td>按行业组织</td></tr>
+          <tr><td>成功案例</td><td>案例标题、背景、需求、工艺方案、结果说明、后台上传素材</td><td>P1</td><td>业务 + 销售</td><td>后台上传即默认允许展示</td></tr>
+          <tr><td>工厂展示</td><td>工厂介绍、设备说明、实验室说明、自动化产线描述、品质流程</td><td>P1</td><td>工厂 + 品牌</td><td>图文并重</td></tr>
+          <tr><td>新闻资讯</td><td>新闻稿、公告内容、行业文章题材</td><td>P1</td><td>运营</td><td>至少准备首批 5-10 篇</td></tr>
+          <tr><td>技术支持</td><td>FAQ、技术文章、检测标准、下载资料</td><td>P1</td><td>工程 + 品牌</td><td>适合后续持续更新</td></tr>
+          <tr><td>视频中心</td><td>视频标题、封面、简介、分类、时长</td><td>P2</td><td>品牌</td><td>无视频可后补</td></tr>
+          <tr><td>联系我们</td><td>电话、邮箱、地址、地图、表单提示语</td><td>P0</td><td>行政 + 销售</td><td>必须准确</td></tr>
+          <tr><td>招贤纳士</td><td>岗位说明、岗位职责、任职要求、福利待遇、投递说明</td><td>P1</td><td>HR</td><td>可动态维护</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>素材准备项</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">素材类型</th>
+            <th style="width: 34%;">内容</th>
+            <th style="width: 14%;">优先级</th>
+            <th style="width: 14%;">建议责任方</th>
+            <th style="width: 16%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Logo 与品牌资产</td><td>中英文 Logo、品牌色、标准图形</td><td>P0</td><td>品牌</td><td>设计阶段即需要</td></tr>
+          <tr><td>首页视觉图</td><td>Banner 大图、业务方向配图、品牌形象图</td><td>P0</td><td>品牌</td><td>首页关键视觉</td></tr>
+          <tr><td>产品图</td><td>产品效果图、工艺对比图、部件应用图</td><td>P0</td><td>业务 + 工程</td><td>影响产品中心质量</td></tr>
+          <tr><td>工厂图</td><td>厂房环境、设备、实验室、自动化产线照片</td><td>P1</td><td>工厂</td><td>建议统一拍摄风格</td></tr>
+          <tr><td>案例图</td><td>项目实拍、应用图、过程图、效果图</td><td>P1</td><td>销售 + 业务</td><td>后台上传即默认允许展示</td></tr>
+          <tr><td>证书图</td><td>资质证书、体系认证、荣誉图片</td><td>P1</td><td>行政</td><td>需高清原件</td></tr>
+          <tr><td>视频素材</td><td>宣传片、工艺视频、车间视频</td><td>P2</td><td>品牌</td><td>可作为二期补充</td></tr>
+          <tr><td>附件资料</td><td>PDF、说明书、检测报告、招聘附件模板</td><td>P1</td><td>工程 + HR</td><td>下载中心用</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      内容准备建议从第 2 周就开始并行推进，尤其是首页主文案、产品中心字段内容、联系方式和首页核心数据口径。
+      如果这些内容滞后，后期即使页面开发完成，也无法形成真正可上线的官网。
+    </div>
+  </div>
+</body>
+</html>

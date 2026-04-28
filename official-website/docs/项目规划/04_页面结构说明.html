@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网页面结构说明</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --secondary: #2f8f57;
+      --soft: #edf7f0;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+    }
+
+    .wrap {
+      width: min(1280px, 92%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 960px;
+      line-height: 1.85;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .summary-item {
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      margin: 28px 0 14px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .page {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .page-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      align-items: center;
+    }
+
+    .page-title {
+      font-size: 22px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .tag {
+      border-radius: 999px;
+      background: var(--soft);
+      border: 1px solid #d0e6d8;
+      color: var(--primary);
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    .block {
+      background: #fafdfb;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .block h3 {
+      margin: 0 0 10px;
+      color: var(--secondary);
+      font-size: 16px;
+    }
+
+    .block ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .note {
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--primary);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .summary,
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .summary,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a class="current" href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网页面结构说明</h1>
+      <p>
+        本文档用于将前台官网从“栏目级规划”推进到“页面级规划”。
+        每个页面明确页面目标、模块构成、内容来源与新补充内容，便于后续原型设计、文案整理、视觉设计和前端开发直接衔接。
+      </p>
+      <div class="summary">
+        <div class="summary-item">
+          <strong>11个页面</strong>
+          <span>覆盖本期前台范围</span>
+        </div>
+        <div class="summary-item">
+          <strong>转化优先</strong>
+          <span>首页/方案/联系为重点</span>
+        </div>
+        <div class="summary-item">
+          <strong>内容重构</strong>
+          <span>不是机械迁移旧站</span>
+        </div>
+        <div class="summary-item">
+          <strong>中英独立</strong>
+          <span>避免中英混排</span>
+        </div>
+      </div>
+    </section>
+
+    <h2>前台核心页面</h2>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">首页</div>
+        <div class="tag">优先级 P0 / 核心转化页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>一句话讲清是谁、做什么、服务谁</li>
+            <li>集中呈现品牌、业务、工厂、品质、案例</li>
+            <li>将访客导向产品页、方案页、联系我们</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>首屏 Banner 与品牌定位</li>
+            <li>公司简介与核心数据</li>
+            <li>两大业务方向入口</li>
+            <li>核心优势、案例预览、工厂预览、新闻预览、联系表单</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站简介、服务、设备、品质内容可提炼</li>
+            <li>需新增品牌主张、CTA、案例图、核心数据</li>
+            <li>建议首页底部直接放询盘表单</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">关于我们</div>
+        <div class="tag">优先级 P0 / 信任页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>建立企业可信度</li>
+            <li>说明的发展背景与技术积累</li>
+            <li>承接资质、团队、工厂实力表达</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>公司简介</li>
+            <li>发展历程</li>
+            <li>荣誉资质</li>
+            <li>团队 / 企业文化 / 合作客户</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站 company.html 可作为基础文案</li>
+            <li>需补发展历程、证书图、团队素材</li>
+            <li>建议强化“2004年成立”和高新技术定位</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">产品中心</div>
+        <div class="tag">优先级 P0 / 业务核心页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>把工艺能力结构化为可浏览内容</li>
+            <li>让客户快速找到相关膜层或处理能力</li>
+            <li>形成标准化产品详情模板</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>分类页：装饰膜、功能膜、光学膜、离子硬化</li>
+            <li>列表页：卡片、筛选、封面图、应用标签</li>
+            <li>详情页：材质、颜色、性能、应用、咨询按钮</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站 service.html 内容丰富，可拆解复用</li>
+            <li>需补图片、标准字段、详情页结构</li>
+            <li>不建议沿用旧站“长篇技术说明”排版</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">解决方案</div>
+        <div class="tag">优先级 P0 / 核心转化页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>按行业场景组织内容，而不是按内部工艺分类</li>
+            <li>让客户从自身行业痛点切入理解价值</li>
+            <li>承接方案咨询与定制需求</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>方案列表：智能穿戴、消费电子、传统五金、汽车、医疗</li>
+            <li>方案详情：行业痛点、推荐工艺、典型部件、案例、CTA</li>
+            <li>相关产品与相关案例联动</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站服务页和简介页有行业信息可提炼</li>
+            <li>需按行业重新组织文案</li>
+            <li>建议将“镜头圈、按键、Logo标识”等重点突出</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">成功案例</div>
+        <div class="tag">优先级 P1 / 信任增强页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>证明真实交付能力</li>
+            <li>增强客户对品质、稳定性、量产能力的信任</li>
+            <li>支撑销售沟通与品牌背书</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>案例列表与行业筛选</li>
+            <li>案例详情：背景、需求、工艺、结果、图片</li>
+            <li>相关推荐与咨询入口</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站几乎没有成型案例内容</li>
+            <li>需要业务侧补项目素材和可公开范围</li>
+            <li>若品牌限制强，可用匿名行业案例</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">工厂展示</div>
+        <div class="tag">优先级 P1 / 制造信任页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>突出制造能力、自动化和品质管控</li>
+            <li>把旧站设备页和品质页内容可视化表达</li>
+            <li>提升制造业官网最关键的“可信度”</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>工厂环境</li>
+            <li>核心设备</li>
+            <li>自动化产线</li>
+            <li>实验室与检测能力、生产流程、产能表达</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站 equipment.html 与 quality.html 可提炼</li>
+            <li>需要大量新图片和可能的视频素材</li>
+            <li>建议避免纯文字堆叠</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">新闻资讯</div>
+        <div class="tag">优先级 P1 / 运营与SEO页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>支撑内容更新与搜索曝光</li>
+            <li>展示公司动态、行业观点和公告信息</li>
+            <li>维持官网活跃度</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>新闻分类：公司新闻、行业资讯、公告通知</li>
+            <li>列表页、详情页</li>
+            <li>相关文章与分享入口</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站仅有公告页，可迁移人权政策等信息</li>
+            <li>新闻体系基本需新建</li>
+            <li>建议预留图文富文本能力</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">技术支持</div>
+        <div class="tag">优先级 P1 / 能力沉淀页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>把旧站工艺与品质说明沉淀为结构化知识</li>
+            <li>方便客户理解工艺、标准和适配范围</li>
+            <li>支撑业务沟通与专业度表达</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>工艺介绍</li>
+            <li>检测标准</li>
+            <li>FAQ</li>
+            <li>下载中心</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站 service.html、quality.html 内容可复用</li>
+            <li>需重新编排成问答和文章结构</li>
+            <li>后续可持续扩展为 SEO 内容库</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">视频中心</div>
+        <div class="tag">优先级 P2 / 补强页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>提升工厂、工艺和企业展示的直观感受</li>
+            <li>支持对外展示宣传片与产线视频</li>
+            <li>增强信任感</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>视频分类</li>
+            <li>视频列表</li>
+            <li>视频详情或弹窗播放</li>
+            <li>封面、简介、标签</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站无成熟视频内容</li>
+            <li>需要新补企业宣传片或产线短视频</li>
+            <li>可先做结构，内容后续补齐</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">联系我们</div>
+        <div class="tag">优先级 P0 / 最关键转化页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>承接所有咨询和合作意向</li>
+            <li>降低客户联系成本</li>
+            <li>形成后台可追踪线索</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>地址、电话、邮箱、地图</li>
+            <li>在线询盘表单</li>
+            <li>海外客户联系方式说明</li>
+            <li>提交成功反馈</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站 contact.html 可直接迁移基础联系方式</li>
+            <li>需新增在线表单和后台管理链路</li>
+            <li>建议全站固定悬浮 CTA 导向本页</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div class="page-title">招贤纳士</div>
+        <div class="tag">优先级 P1 / 招聘转化页</div>
+      </div>
+      <div class="grid">
+        <div class="block">
+          <h3>页面目标</h3>
+          <ul>
+            <li>承接招聘信息发布与简历收集</li>
+            <li>增强雇主品牌形象</li>
+            <li>配合后台招聘管理使用</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>页面模块</h3>
+          <ul>
+            <li>招聘介绍</li>
+            <li>岗位列表</li>
+            <li>岗位详情</li>
+            <li>简历投递表单</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h3>内容来源</h3>
+          <ul>
+            <li>旧站无该页面内容</li>
+            <li>需新增岗位和 HR 文案</li>
+            <li>需支持附件上传与后台查看</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="note">
+      页面设计原则：先建立品牌与信任，再组织业务与能力，最后在核心节点承接转化。
+      对旧站内容的处理方式应当是“重组 + 精简 + 结构化”，而不是直接复制长篇技术文案。
+    </div>
+  </div>
+</body>
+</html>

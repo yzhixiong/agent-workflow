@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网接口规划文档</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --soft: #edf7f0;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1360px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--primary); background: #fff; border: 1px solid var(--border);
+      border-radius: 999px; padding: 8px 14px; font-size: 14px;
+    }
+    .nav a.current { color: #fff; background: var(--primary); border-color: var(--primary); }
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff; border-radius: 26px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; max-width: 1020px; line-height: 1.85; font-size: 15px; opacity: 0.95; }
+    .section {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      box-shadow: var(--shadow); padding: 22px; margin-bottom: 16px;
+    }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      border: 1px solid var(--border); padding: 12px 14px; text-align: left; vertical-align: top;
+      font-size: 14px; line-height: 1.75;
+    }
+    th { background: var(--soft); color: var(--primary); font-weight: 700; }
+    td { color: var(--muted); }
+    .note {
+      background: #edf7f0; border: 1px solid #d1e7d8; border-radius: 18px;
+      padding: 18px; color: var(--primary); line-height: 1.8; font-size: 14px;
+    }
+    code { font-family: Menlo, Monaco, Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a class="current" href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网接口规划文档</h1>
+      <p>
+        接口规划建议分为前台公开接口、后台管理接口、文件接口和认证接口四层。
+        前台接口以只读为主，承接页面渲染和表单提交；后台接口以 CRUD、排序、上下架、状态管理为主。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>接口分层建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">接口层</th>
+            <th style="width: 28%;">路径前缀</th>
+            <th style="width: 24%;">用途</th>
+            <th style="width: 28%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>前台公开接口</td>
+            <td><code>/api/public/*</code></td>
+            <td>前台页面内容读取、询盘提交、简历投递</td>
+            <td>无需登录，限流与参数校验必做</td>
+          </tr>
+          <tr>
+            <td>后台认证接口</td>
+            <td><code>/api/admin/auth/*</code></td>
+            <td>登录、退出、获取当前用户、刷新 token</td>
+            <td>JWT 或 Session + Redis</td>
+          </tr>
+          <tr>
+            <td>后台管理接口</td>
+            <td><code>/api/admin/*</code></td>
+            <td>后台内容管理、线索管理、站点管理、权限管理</td>
+            <td>全部需要鉴权</td>
+          </tr>
+          <tr>
+            <td>文件接口</td>
+            <td><code>/api/admin/files/*</code></td>
+            <td>文件上传、查询、删除、引用</td>
+            <td>后台上传为主，前台仅访问 URL</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>前端渲染与语言路径约定</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">项</th>
+            <th style="width: 36%;">约定</th>
+            <th style="width: 40%;">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>官网前台技术</td><td>Nuxt 3 SSR / 混合渲染</td><td>前台页面在服务端请求公开接口并输出完整 HTML，兼顾 SEO 与动态内容。</td></tr>
+          <tr><td>后台管理技术</td><td>Vue SPA</td><td>后台以管理效率为主，不承担 SEO 诉求。</td></tr>
+          <tr><td>语言路径</td><td><code>/zh-cn/*</code> / <code>/en/*</code></td><td>中英文页面使用独立 URL 路径，便于 SEO、hreflang 和内容隔离。</td></tr>
+          <tr><td>接口调用方式</td><td>服务端渲染 + 浏览器交互复用同一组公开接口</td><td>SSR 首屏和后续前端交互均调用 <code>/api/public/*</code>，后端无需区分静态或动态页面。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>前台公开接口建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 28%;">接口</th>
+            <th style="width: 14%;">方法</th>
+            <th style="width: 28%;">说明</th>
+            <th style="width: 30%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/api/public/site/config</code></td><td>GET</td><td>获取站点基础配置</td><td>Logo、联系方式、页脚等</td></tr>
+          <tr><td><code>/api/public/home</code></td><td>GET</td><td>获取首页聚合内容</td><td>Banner、核心模块、推荐内容</td></tr>
+          <tr><td><code>/api/public/about</code></td><td>GET</td><td>获取关于我们内容</td><td>公司简介、历程、资质等</td></tr>
+          <tr><td><code>/api/public/products</code></td><td>GET</td><td>产品列表</td><td>支持分类、关键字、语言参数</td></tr>
+          <tr><td><code>/api/public/products/{id}</code></td><td>GET</td><td>产品详情</td><td>详情页渲染</td></tr>
+          <tr><td><code>/api/public/solutions</code></td><td>GET</td><td>方案列表</td><td>按行业分类</td></tr>
+          <tr><td><code>/api/public/solutions/{id}</code></td><td>GET</td><td>方案详情</td><td>含产品、案例关联</td></tr>
+          <tr><td><code>/api/public/cases</code></td><td>GET</td><td>案例列表</td><td>支持行业筛选、置顶排序</td></tr>
+          <tr><td><code>/api/public/cases/{id}</code></td><td>GET</td><td>案例详情</td><td>详情页</td></tr>
+          <tr><td><code>/api/public/news</code></td><td>GET</td><td>新闻列表</td><td>支持分类、分页</td></tr>
+          <tr><td><code>/api/public/news/{id}</code></td><td>GET</td><td>新闻详情</td><td>详情页</td></tr>
+          <tr><td><code>/api/public/videos</code></td><td>GET</td><td>视频列表</td><td>可选首期简化</td></tr>
+          <tr><td><code>/api/public/jobs</code></td><td>GET</td><td>岗位列表</td><td>招聘页面展示</td></tr>
+          <tr><td><code>/api/public/jobs/{id}</code></td><td>GET</td><td>岗位详情</td><td>岗位详情页</td></tr>
+          <tr><td><code>/api/public/inquiries</code></td><td>POST</td><td>提交询盘</td><td>需防刷、支持附件关联</td></tr>
+          <tr><td><code>/api/public/resumes</code></td><td>POST</td><td>提交简历</td><td>支持 job_id 与附件</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>后台管理接口建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">资源</th>
+            <th style="width: 24%;">接口组</th>
+            <th style="width: 24%;">主要操作</th>
+            <th style="width: 28%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>站点配置</td><td><code>/api/admin/site-config</code></td><td>查询、更新</td><td>单例资源</td></tr>
+          <tr><td>Banner</td><td><code>/api/admin/banners</code></td><td>列表、新增、编辑、删除、排序</td><td>首页运营内容</td></tr>
+          <tr><td>关于我们</td><td><code>/api/admin/about</code></td><td>查询、更新</td><td>可拆成多个内容块</td></tr>
+          <tr><td>产品分类</td><td><code>/api/admin/product-categories</code></td><td>增删改查、排序</td><td>分类树结构</td></tr>
+          <tr><td>产品</td><td><code>/api/admin/products</code></td><td>增删改查、上下架</td><td>详情与列表字段组合</td></tr>
+          <tr><td>解决方案</td><td><code>/api/admin/solutions</code></td><td>增删改查、上下架、关联产品/案例</td><td>行业方案</td></tr>
+          <tr><td>案例</td><td><code>/api/admin/cases</code></td><td>增删改查、置顶、上下架</td><td>支持图集</td></tr>
+          <tr><td>工厂展示</td><td><code>/api/admin/factory</code></td><td>查询、更新</td><td>可用内容块模式</td></tr>
+          <tr><td>新闻分类</td><td><code>/api/admin/news-categories</code></td><td>增删改查</td><td>基础字典类接口</td></tr>
+          <tr><td>新闻</td><td><code>/api/admin/news</code></td><td>增删改查、发布、下架</td><td>富文本内容</td></tr>
+          <tr><td>技术支持</td><td><code>/api/admin/support</code></td><td>文章、FAQ、下载资料管理</td><td>可拆子资源</td></tr>
+          <tr><td>视频</td><td><code>/api/admin/videos</code></td><td>增删改查、上下架</td><td>视频中心</td></tr>
+          <tr><td>岗位</td><td><code>/api/admin/jobs</code></td><td>增删改查、上下架</td><td>招聘模块</td></tr>
+          <tr><td>询盘</td><td><code>/api/admin/inquiries</code></td><td>列表、详情、状态更新、备注</td><td>销售线索管理</td></tr>
+          <tr><td>简历</td><td><code>/api/admin/resumes</code></td><td>列表、详情、状态更新、备注</td><td>HR 线索管理</td></tr>
+          <tr><td>文件</td><td><code>/api/admin/files</code></td><td>上传、列表、删除、详情</td><td>统一文件中心</td></tr>
+          <tr><td>用户/角色</td><td><code>/api/admin/users</code> / <code>/roles</code></td><td>账号、角色、菜单授权</td><td>后台权限管理</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>认证与响应建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">项</th>
+            <th style="width: 38%;">建议</th>
+            <th style="width: 38%;">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>认证方式</td>
+            <td>后台使用 JWT + Redis 或 Session + Redis</td>
+            <td>按团队习惯选型，重点是登录态可控与失效管理。</td>
+          </tr>
+          <tr>
+            <td>响应格式</td>
+            <td>统一使用 code、message、data 结构</td>
+            <td>便于前端全局拦截与错误提示。</td>
+          </tr>
+          <tr>
+            <td>分页格式</td>
+            <td>records、page_no、page_size、total</td>
+            <td>后台列表统一风格。</td>
+          </tr>
+          <tr>
+            <td>语言参数</td>
+            <td>支持 <code>lang=zh-CN</code> / <code>lang=en-US</code></td>
+            <td>前台公开接口建议统一语言入参。</td>
+          </tr>
+          <tr>
+            <td>文件上传</td>
+            <td>先传文件，返回 file_id，再关联业务表</td>
+            <td>有利于统一资源管理。</td>
+          </tr>
+          <tr>
+            <td>安全要求</td>
+            <td>参数校验、限流、防刷、上传类型校验</td>
+            <td>询盘和简历接口尤其需要加强控制。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      接口规划阶段不建议一次性写满所有请求和响应字段。
+      更合理的做法是先把资源边界和接口组稳定下来，再在联调前为高优先级模块补详细字段定义。
+      当前前端技术路线已确认，因此公开接口需要兼顾 Nuxt 3 SSR 首屏渲染和浏览器侧交互复用。
+    </div>
+  </div>
+</body>
+</html>

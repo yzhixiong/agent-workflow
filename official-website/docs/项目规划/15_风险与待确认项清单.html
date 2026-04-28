@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网风险与待确认项清单</title>
+  <style>
+    :root {
+      --bg: #f5f8f6; --text: #1f2a24; --muted: #5b6c63; --primary: #1f6745;
+      --soft: #edf7f0; --border: #d7e4dc; --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top left, #e5f3ea 0, transparent 34%), radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%), var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1360px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; position: sticky; top: 0; z-index: 10;
+      background: rgba(245, 248, 246, 0.92); backdrop-filter: blur(8px); padding: 10px 0 6px;
+    }
+    .nav a { text-decoration: none; color: var(--primary); background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 8px 14px; font-size: 14px; }
+    .nav a.current { color: #fff; background: var(--primary); border-color: var(--primary); }
+    .hero { background: linear-gradient(135deg, #1f6b46, #2f8f57); color: #fff; border-radius: 26px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 18px; }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; max-width: 1020px; line-height: 1.85; font-size: 15px; opacity: 0.95; }
+    .section { background: #fff; border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow); padding: 22px; margin-bottom: 16px; }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid var(--border); padding: 12px 14px; text-align: left; vertical-align: top; font-size: 14px; line-height: 1.75; }
+    th { background: var(--soft); color: var(--primary); font-weight: 700; }
+    td { color: var(--muted); }
+    .note { background: #edf7f0; border: 1px solid #d1e7d8; border-radius: 18px; padding: 18px; color: var(--primary); line-height: 1.8; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a class="current" href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网风险与待确认项清单</h1>
+      <p>
+        本文档用于集中管理项目仍待确认、待决策或存在风险的事项。它不是一次性文档，而应在项目推进过程中持续更新，作为例会和评审的跟踪基础。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>启动后优先闭环项</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">事项</th>
+            <th style="width: 28%;">说明</th>
+            <th style="width: 16%;">影响范围</th>
+            <th style="width: 10%;">责任人</th>
+            <th style="width: 10%;">优先级</th>
+            <th style="width: 14%;">闭环计划</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>英文内容准备范围</td><td>已确认首期采用全站双语覆盖</td><td>前台、后台、多语言字段</td><td>Ocean</td><td>P0</td><td>已于 2026-03-19 确认</td></tr>
+          <tr><td>客户案例公开边界</td><td>已确认客户与产品只要在后台上传，即视为允许展示</td><td>案例页、首页、方案页、产品页</td><td>Ocean</td><td>P0</td><td>已于 2026-03-19 确认</td></tr>
+          <tr><td>首页核心数据口径</td><td>统一设备数量、员工数量、专利数量等对外口径</td><td>首页、关于我们</td><td>Ocean</td><td>P0</td><td>2026-03-25 前收敛</td></tr>
+          <tr><td>SEO 技术路线</td><td>已确认前台官网采用 Nuxt 3 SSR/混合渲染，后台管理采用 Vue SPA</td><td>前端架构、上线效果</td><td>Ocean</td><td>P0</td><td>已于 2026-03-19 确认</td></tr>
+          <tr><td>文件存储方案</td><td>确认 MinIO、自建存储还是云对象存储，访问域名如何配置</td><td>后台上传、前台资源访问</td><td>Ocean</td><td>P1</td><td>2026-04-03 前收敛</td></tr>
+          <tr><td>招聘流程边界</td><td>确认官网首期仅收简历，还是需要邮件通知、自动筛选等扩展能力</td><td>招聘模块</td><td>Ocean</td><td>P1</td><td>2026-04-08 前收敛</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>主要风险清单</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">风险</th>
+            <th style="width: 36%;">表现</th>
+            <th style="width: 18%;">影响</th>
+            <th style="width: 24%;">建议措施</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>素材准备滞后</td><td>页面开发完成但没有足够内容和图片填充</td><td>影响上线完整度</td><td>第2周即启动内容准备清单</td></tr>
+          <tr><td>范围不断扩大</td><td>新增很多非核心功能，影响两个月节奏</td><td>影响排期与质量</td><td>坚持 P0/P1 范围管理</td></tr>
+          <tr><td>旧站内容直接照搬</td><td>新站结构清晰但内容仍旧冗长难读</td><td>影响转化与品牌感知</td><td>坚持结构化重写，不做机械迁移</td></tr>
+          <tr><td>后台过度复杂化</td><td>把官网后台做成泛业务系统，开发周期失控</td><td>影响交付</td><td>后台只服务内容和线索管理</td></tr>
+          <tr><td>上线后无人维护</td><td>新闻、案例、招聘等模块长时间不更新</td><td>影响官网长期价值</td><td>明确运营责任人和更新机制</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      当前项目已启动，所有待确认项的统一责任人暂定为 Ocean。
+      对这个项目而言，真正的风险不在技术，而在“内容准备、公开边界、范围控制、运营落实”。
+    </div>
+  </div>
+</body>
+</html>

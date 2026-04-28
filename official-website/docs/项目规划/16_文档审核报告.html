@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网文档问题与修复跟踪</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --soft: #edf7f0;
+      --border: #d7e4dc;
+      --warn: #a85e16;
+      --warn-bg: #fff6ea;
+      --ok: #1f6745;
+      --ok-bg: #edf7f0;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%), var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1380px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .hero, .section, .issue { background: #fff; border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow); }
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff;
+      padding: 30px;
+      margin-bottom: 18px;
+      border: none;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; }
+    .hero p { margin: 0; max-width: 1080px; line-height: 1.9; font-size: 15px; opacity: 0.96; }
+    .section { padding: 22px; margin-bottom: 16px; }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    .section ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.85; font-size: 14px; }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 960px;
+      background: #fff;
+    }
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    th {
+      background: #f7fbf8;
+      color: var(--primary);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+    tr:last-child td { border-bottom: none; }
+    .issue {
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .issue-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .issue-head h3 {
+      margin: 0;
+      color: var(--primary);
+      font-size: 21px;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .status.done {
+      color: var(--ok);
+      background: var(--ok-bg);
+    }
+    .status.flow {
+      color: var(--warn);
+      background: var(--warn-bg);
+    }
+    .summary {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .cell {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: #fafdfb;
+    }
+    .cell strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary);
+      font-size: 14px;
+    }
+    .cell p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+    .full { grid-column: 1 / -1; }
+    .note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a class="current" href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+    <section class="hero">
+      <h1>官网文档问题与修复跟踪</h1>
+      <p>本页作为唯一的问题闭环台账，在同一页面中同时记录问题是什么、何时审查发现、修复结果是什么、何时完成修复，以及修复后的实际效果。后续继续审核时，直接在本页追加新问题，不再拆成审核页和修复页两张表。</p>
+    </section>
+    <section class="section">
+      <h2>记录规则</h2>
+      <ul>
+        <li>每个问题只保留一条主记录，问题、修复结果和最终效果都放在同一条里。</li>
+        <li>发现时间与修复时间统一使用明确日期记录，当前历史条目按本次整理补记为 2026-03-19。</li>
+        <li>如果首轮处理后仍有剩余问题，不覆盖旧记录，而是在状态中说明“转入下一轮继续跟进”。</li>
+      </ul>
+    </section>
+    <section class="section">
+      <h2>闭环总览</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>问题</th>
+              <th>发现时间</th>
+              <th>修复时间</th>
+              <th>当前状态</th>
+              <th>修复后效果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>R1-1</td>
+              <td>排期口径冲突</td>
+              <td>2026-03-19 首轮审核</td>
+              <td>2026-03-19 首轮修复</td>
+              <td>已处理，复审转入 R2-1</td>
+              <td>首轮已拆分草案与冻结版口径，但里程碑编号语义仍需继续统一。</td>
+            </tr>
+            <tr>
+              <td>R1-2</td>
+              <td>权限模型未对齐</td>
+              <td>2026-03-19 首轮审核</td>
+              <td>2026-03-19 首轮修复</td>
+              <td>已处理，复审转入 R2-2</td>
+              <td>数据库承载范围已补齐，但展示层边界仍需继续收紧。</td>
+            </tr>
+            <tr>
+              <td>R1-3</td>
+              <td>接口响应结构表述不一致</td>
+              <td>2026-03-19 首轮审核</td>
+              <td>2026-03-19 首轮修复</td>
+              <td>已闭环</td>
+              <td>字段口径统一收敛到 `data` 包裹结构，接口表述一致。</td>
+            </tr>
+            <tr>
+              <td>R1-4</td>
+              <td>索引文案过时</td>
+              <td>2026-03-19 首轮审核</td>
+              <td>2026-03-19 首轮修复</td>
+              <td>已闭环</td>
+              <td>索引页已更新为当前完整文档集的表述。</td>
+            </tr>
+            <tr>
+              <td>R2-1</td>
+              <td>里程碑编号语义不一致</td>
+              <td>2026-03-19 二轮复审</td>
+              <td>2026-03-19 二轮修复</td>
+              <td>已闭环</td>
+              <td>`M1/M2/M3/M4` 在路线图与开发任务页已统一。</td>
+            </tr>
+            <tr>
+              <td>R2-2</td>
+              <td>权限边界表达仍偏松</td>
+              <td>2026-03-19 二轮复审</td>
+              <td>2026-03-19 二轮修复</td>
+              <td>已闭环</td>
+              <td>“首期实现”与“后续预留”已拆开展示，首期范围更清晰。</td>
+            </tr>
+            <tr>
+              <td>R2-3</td>
+              <td>问题与修复记录分散</td>
+              <td>2026-03-19 二轮复审</td>
+              <td>2026-03-19 二轮修复</td>
+              <td>已闭环</td>
+              <td>审核、修复、时间与效果已整合到本页单点查看。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">当前共跟踪 7 个问题，其中 5 个已直接闭环，2 个在首轮处理后转入第二轮继续跟进，现已全部完成。</p>
+    </section>
+    <section class="section">
+      <h2>问题明细</h2>
+
+      <article class="issue">
+        <div class="issue-head">
+          <h3>R1-1 排期口径冲突</h3>
+          <span class="status flow">已处理，转入 R2-1</span>
+        </div>
+        <p class="summary">里程碑与阶段产出对“数据库与接口规划”的完成时间表述不一致，初次阅读时容易误解数据库与接口究竟是草案完成还是冻结完成。</p>
+        <div class="grid">
+          <div class="cell">
+            <strong>发现时间</strong>
+            <p>2026-03-19 首轮审核</p>
+          </div>
+          <div class="cell">
+            <strong>涉及文档</strong>
+            <p><a href="./01_项目实施路线图.html">01_项目实施路线图.html</a>、<a href="./09_开发任务拆解与里程碑.html">09_开发任务拆解与里程碑.html</a></p>
+          </div>
+          <div class="cell">
+            <strong>修复结果</strong>
+            <p>在路线图中区分了“数据库与接口草案”与“冻结版规划”，先把首轮最直接的口径冲突拆开。</p>
+          </div>
+          <div class="cell">
+            <strong>修复时间</strong>
+            <p>2026-03-19 首轮修复</p>
+          </div>
+          <div class="cell full">
+            <strong>修复后效果</strong>
+            <p>首轮阅读歧义已下降，但复审时仍发现 `M1/M2` 编号语义没有完全统一，因此后续转入 <a href="#r2-1">R2-1</a> 继续收敛。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="issue">
+        <div class="issue-head">
+          <h3>R1-2 权限模型未对齐</h3>
+          <span class="status flow">已处理，转入 R2-2</span>
+        </div>
+        <p class="summary">权限说明文档超出了数据库设计的承载范围，按钮级权限写在说明里，但数据库结构尚无对应模型支撑。</p>
+        <div class="grid">
+          <div class="cell">
+            <strong>发现时间</strong>
+            <p>2026-03-19 首轮审核</p>
+          </div>
+          <div class="cell">
+            <strong>涉及文档</strong>
+            <p><a href="./06_数据库表结构草案.html">06_数据库表结构草案.html</a>、<a href="./08_后台菜单与权限结构说明.html">08_后台菜单与权限结构说明.html</a></p>
+          </div>
+          <div class="cell">
+            <strong>修复结果</strong>
+            <p>补充了 `sys_permission` 与 `sys_role_permission`，并限定首期权限能力的数据库落地边界。</p>
+          </div>
+          <div class="cell">
+            <strong>修复时间</strong>
+            <p>2026-03-19 首轮修复</p>
+          </div>
+          <div class="cell full">
+            <strong>修复后效果</strong>
+            <p>数据库层与权限描述基本对齐，但复审时仍发现展示口径偏松，首期实现与后续预留没有完全拆开，因此后续转入 <a href="#r2-2">R2-2</a> 继续修整。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="issue">
+        <div class="issue-head">
+          <h3>R1-3 接口响应结构表述不一致</h3>
+          <span class="status done">已闭环</span>
+        </div>
+        <p class="summary">接口总规约定义了统一返回结构，但字段文档没有明确字段位于 `data` 内部，导致调用方容易按平铺结构理解。</p>
+        <div class="grid">
+          <div class="cell">
+            <strong>发现时间</strong>
+            <p>2026-03-19 首轮审核</p>
+          </div>
+          <div class="cell">
+            <strong>涉及文档</strong>
+            <p><a href="./07_接口规划文档.html">07_接口规划文档.html</a>、<a href="./11_接口字段清单.html">11_接口字段清单.html</a></p>
+          </div>
+          <div class="cell">
+            <strong>修复结果</strong>
+            <p>字段解释统一改为 `data字段`，并补充说明返回体的统一包裹关系。</p>
+          </div>
+          <div class="cell">
+            <strong>修复时间</strong>
+            <p>2026-03-19 首轮修复</p>
+          </div>
+          <div class="cell full">
+            <strong>修复后效果</strong>
+            <p>接口总规约与字段清单口径已经一致，后续复审未再发现同类问题。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="issue">
+        <div class="issue-head">
+          <h3>R1-4 索引文案过时</h3>
+          <span class="status done">已闭环</span>
+        </div>
+        <p class="summary">索引页仍保留早期文案，没有反映文档集已经扩展后的真实状态，容易让人误判文档完整度。</p>
+        <div class="grid">
+          <div class="cell">
+            <strong>发现时间</strong>
+            <p>2026-03-19 首轮审核</p>
+          </div>
+          <div class="cell">
+            <strong>涉及文档</strong>
+            <p><a href="./00_索引.html">00_索引.html</a></p>
+          </div>
+          <div class="cell">
+            <strong>修复结果</strong>
+            <p>索引首页改成“当前完整文档集”的表述，并同步修正底部扩展说明。</p>
+          </div>
+          <div class="cell">
+            <strong>修复时间</strong>
+            <p>2026-03-19 首轮修复</p>
+          </div>
+          <div class="cell full">
+            <strong>修复后效果</strong>
+            <p>索引页文案与当前文档规模一致，能直接作为正式入口页使用。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="issue" id="r2-1">
+        <div class="issue-head">
+          <h3>R2-1 里程碑编号语义不一致</h3>
+          <span class="status done">已闭环</span>
+        </div>
+        <p class="summary">首轮修复后，路线图与开发任务页虽然已经拆开草案与冻结口径，但 `M1/M2` 在两页中的编号含义仍没有完全统一。</p>
+        <div class="grid">
+          <div class="cell">
+            <strong>发现时间</strong>
+            <p>2026-03-19 二轮复审</p>
+          </div>
+          <div class="cell">
+            <strong>涉及文档</strong>
+            <p><a href="./01_项目实施路线图.html">01_项目实施路线图.html</a>、<a href="./09_开发任务拆解与里程碑.html">09_开发任务拆解与里程碑.html</a></p>
+          </div>
+          <div class="cell">
+            <strong>修复结果</strong>
+            <p>统一为一致的 `M1/M2/M3/M4` 定义，并让两个页面的里程碑语义完全对齐。</p>
+          </div>
+          <div class="cell">
+            <strong>修复时间</strong>
+            <p>2026-03-19 二轮修复</p>
+          </div>
+          <div class="cell full">
+            <strong>修复后效果</strong>
+            <p>里程碑编号与阶段含义现在可直接对照，不再需要靠上下文猜测。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="issue" id="r2-2">
+        <div class="issue-head">
+          <h3>R2-2 权限边界表达仍偏松</h3>
+          <span class="status done">已闭环</span>
+        </div>
+        <p class="summary">权限模型虽然已补齐数据结构，但页面说明仍把首期要做的能力和后续预留能力混在一起展示，容易造成范围误读。</p>
+        <div class="grid">
+          <div class="cell">
+            <strong>发现时间</strong>
+            <p>2026-03-19 二轮复审</p>
+          </div>
+          <div class="cell">
+            <strong>涉及文档</strong>
+            <p><a href="./08_后台菜单与权限结构说明.html">08_后台菜单与权限结构说明.html</a></p>
+          </div>
+          <div class="cell">
+            <strong>修复结果</strong>
+            <p>将权限粒度拆分为“首期实现”和“后续预留”两组，明确哪些是当前范围，哪些只是保留位。</p>
+          </div>
+          <div class="cell">
+            <strong>修复时间</strong>
+            <p>2026-03-19 二轮修复</p>
+          </div>
+          <div class="cell full">
+            <strong>修复后效果</strong>
+            <p>权限边界表达收紧后，首期交付范围和扩展方向已经可以一眼分辨。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="issue">
+        <div class="issue-head">
+          <h3>R2-3 问题与修复记录分散</h3>
+          <span class="status done">已闭环</span>
+        </div>
+        <p class="summary">原来问题和修复拆在不同页面里，需要来回切换才能看清同一个问题的修复结果，不利于追踪闭环状态。</p>
+        <div class="grid">
+          <div class="cell">
+            <strong>发现时间</strong>
+            <p>2026-03-19 二轮复审</p>
+          </div>
+          <div class="cell">
+            <strong>涉及文档</strong>
+            <p><a href="./00_索引.html">00_索引.html</a>、<a href="./20_联合审核版汇总.html">20_联合审核版汇总.html</a>、本页台账结构</p>
+          </div>
+          <div class="cell">
+            <strong>修复结果</strong>
+            <p>将问题、发现时间、修复结果、修复时间与修复后效果全部并入本页单条记录，同时把其余页面入口收敛到本页。</p>
+          </div>
+          <div class="cell">
+            <strong>修复时间</strong>
+            <p>2026-03-19 二轮修复</p>
+          </div>
+          <div class="cell full">
+            <strong>修复后效果</strong>
+            <p>现在不需要跨页对照，打开本页就能直接看到问题从发现到闭环的完整过程。</p>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+</body>
+</html>

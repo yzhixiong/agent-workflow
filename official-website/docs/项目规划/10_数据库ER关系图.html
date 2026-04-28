@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网数据库ER关系图</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --secondary: #2f8f57;
+      --soft: #edf7f0;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1380px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(245, 248, 246, 0.92); backdrop-filter: blur(8px); padding: 10px 0 6px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--primary); background: #fff; border: 1px solid var(--border);
+      border-radius: 999px; padding: 8px 14px; font-size: 14px;
+    }
+    .nav a.current { color: #fff; background: var(--primary); border-color: var(--primary); }
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57); color: #fff; border-radius: 26px;
+      padding: 30px; box-shadow: var(--shadow); margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; max-width: 1020px; line-height: 1.85; font-size: 15px; opacity: 0.95; }
+    .section {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      box-shadow: var(--shadow); padding: 22px; margin-bottom: 16px;
+    }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .domain {
+      background: #fafdfb; border: 1px solid var(--border); border-radius: 18px; padding: 16px;
+    }
+    .domain h3 { margin: 0 0 10px; color: var(--secondary); font-size: 18px; }
+    .domain ul { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.8; font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      border: 1px solid var(--border); padding: 12px 14px; text-align: left; vertical-align: top;
+      font-size: 14px; line-height: 1.75;
+    }
+    th { background: var(--soft); color: var(--primary); font-weight: 700; }
+    td { color: var(--muted); }
+    .note {
+      background: #edf7f0; border: 1px solid #d1e7d8; border-radius: 18px;
+      padding: 18px; color: var(--primary); line-height: 1.8; font-size: 14px;
+    }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a class="current" href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网数据库 ER 关系图</h1>
+      <p>
+        本文档从实体关系视角梳理官网系统的核心数据域，重点突出“内容域、线索域、权限域、资源域”的主从关系和多对多关系。
+        它与数据库表结构草案互为补充，前者讲关系，后者讲字段。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>数据域划分</h2>
+      <div class="grid">
+        <article class="domain">
+          <h3>内容域</h3>
+          <ul>
+            <li>cms_site_config</li>
+            <li>cms_banner</li>
+            <li>cms_content_block</li>
+            <li>cms_product_category / cms_product / cms_product_detail</li>
+            <li>cms_solution / cms_case / cms_news / cms_video / cms_job</li>
+          </ul>
+        </article>
+        <article class="domain">
+          <h3>线索域</h3>
+          <ul>
+            <li>lead_inquiry / lead_inquiry_file</li>
+            <li>hr_resume</li>
+            <li>与岗位、文件资源形成引用关系</li>
+          </ul>
+        </article>
+        <article class="domain">
+          <h3>权限域</h3>
+          <ul>
+            <li>sys_user</li>
+            <li>sys_role</li>
+            <li>sys_menu</li>
+            <li>sys_role_menu</li>
+          </ul>
+        </article>
+        <article class="domain">
+          <h3>资源域</h3>
+          <ul>
+            <li>cms_file_asset</li>
+            <li>为 Banner、产品、案例、新闻、视频、简历等提供统一文件引用</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>核心关系表述</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 26%;">主实体</th>
+            <th style="width: 18%;">关系</th>
+            <th style="width: 26%;">从实体</th>
+            <th style="width: 30%;">关系说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>sys_role</td><td>1:N</td><td>sys_role_menu</td><td>一个角色可以配置多个菜单授权。</td></tr>
+          <tr><td>sys_menu</td><td>1:N</td><td>sys_role_menu</td><td>一个菜单可以被多个角色引用。</td></tr>
+          <tr><td>cms_product_category</td><td>1:N</td><td>cms_product</td><td>一个分类下可有多个产品或工艺能力。</td></tr>
+          <tr><td>cms_product</td><td>1:1</td><td>cms_product_detail</td><td>产品主信息与详情扩展分离。</td></tr>
+          <tr><td>cms_solution</td><td>N:N</td><td>cms_product</td><td>方案与产品为多对多，建议中间表。</td></tr>
+          <tr><td>cms_solution</td><td>N:N</td><td>cms_case</td><td>方案详情可关联多个典型案例。</td></tr>
+          <tr><td>cms_case</td><td>1:N</td><td>cms_case_gallery</td><td>案例详情通常需要多张展示图片。</td></tr>
+          <tr><td>cms_job</td><td>1:N</td><td>hr_resume</td><td>一个岗位对应多个简历投递记录。</td></tr>
+          <tr><td>lead_inquiry</td><td>1:N</td><td>lead_inquiry_file</td><td>一个询盘可能上传多个附件。</td></tr>
+          <tr><td>cms_file_asset</td><td>1:N</td><td>多业务表</td><td>文件资源作为统一引用中心，被多个业务表通过 file_id 关联。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>建议补充的中间关系表</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 28%;">关系表</th>
+            <th style="width: 32%;">核心字段</th>
+            <th style="width: 40%;">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>cms_solution_product</td><td>id、solution_id、product_id、sort_no</td><td>解决方案与产品关联表，用于方案页推荐产品。</td></tr>
+          <tr><td>cms_solution_case</td><td>id、solution_id、case_id、sort_no</td><td>解决方案与案例关联表，用于方案页展示典型案例。</td></tr>
+          <tr><td>sys_user_role</td><td>id、user_id、role_id</td><td>如果需要支持一个用户多个角色，建议增加该表。</td></tr>
+          <tr><td>cms_page_block_rel</td><td>id、page_code、block_id、sort_no</td><td>如果单页内容块复用度高，可增加页面与内容块关联表。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      官网项目的 ER 设计应尽量“清晰、稳定、可维护”。首期不建议引入过度通用的动态模型，
+      先以明确业务实体建模，后续再基于实际扩展需求逐步演进。
+    </div>
+  </div>
+</body>
+</html>

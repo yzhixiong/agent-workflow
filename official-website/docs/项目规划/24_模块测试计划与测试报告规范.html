@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>森科官网模块测试计划与测试报告规范</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --soft: #edf7f0;
+      --soft-2: #f8fcf9;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1360px, 94%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 1040px;
+      line-height: 1.85;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .summary-item {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .summary-item span {
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: 0.95;
+    }
+
+    .section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: var(--soft-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel p,
+    .panel li,
+    .section p,
+    .section li {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    .panel ul,
+    .section ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    th {
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    .note {
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--primary);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    code {
+      font-family: Menlo, Monaco, Consolas, monospace;
+    }
+
+    @media (max-width: 980px) {
+      .summary,
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .summary,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./23_项目排期基线与进度管控.html">项目排期基线与进度管控</a>
+      <a class="current" href="./24_模块测试计划与测试报告规范.html">模块测试计划与测试报告规范</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./22_项目启动书.html">项目启动书</a>
+    </nav>
+
+    <section class="hero">
+      <h1>森科官网模块测试计划与测试报告规范</h1>
+      <p>
+        本文档用于把“测试”从单一清单升级为“按模块验收 + 按模块出报告”的执行机制。
+        当前项目由 Ocean 单人负责，因此测试计划需要与排期基线直接联动，做到模块完成一个、测试一个、报告一个、缺陷闭环一个。
+      </p>
+      <div class="summary">
+        <div class="summary-item">
+          <strong>测试责任人</strong>
+          <span>Ocean</span>
+        </div>
+        <div class="summary-item">
+          <strong>测试方式</strong>
+          <span>模块级测试 + 上线前总回归</span>
+        </div>
+        <div class="summary-item">
+          <strong>报告要求</strong>
+          <span>每个模块输出单独测试报告</span>
+        </div>
+        <div class="summary-item">
+          <strong>联动文档</strong>
+          <span>与 23 号进度管控页同步更新</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>测试原则</h2>
+      <div class="grid-2">
+        <article class="panel">
+          <h3>执行原则</h3>
+          <ul>
+            <li>模块开发完成后，不等待所有模块一起测试，而是立即执行该模块测试。</li>
+            <li>每个模块必须形成单独测试报告，记录通过项、缺陷项和结论。</li>
+            <li>缺陷关闭后需要回归，并在报告中补记回归结论。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>验收原则</h3>
+          <ul>
+            <li>P0 模块必须测试通过并出报告，才允许进入上线候选版本。</li>
+            <li>P1 模块未通过不影响首期上线时，需在报告中明确标记和处理策略。</li>
+            <li>上线前仍需输出一份总体验收报告，覆盖跨模块主流程。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>模块测试矩阵</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">模块</th>
+            <th style="width: 28%;">测试重点</th>
+            <th style="width: 18%;">计划阶段</th>
+            <th style="width: 18%;">报告名称建议</th>
+            <th style="width: 10%;">责任人</th>
+            <th style="width: 8%;">优先级</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>前台公共模块</td><td>导航、页脚、语言切换、SEO 基础、响应式</td><td>M2-M3</td><td><code>模块测试报告_前台公共模块_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>首页</td><td>首屏、核心数据、入口跳转、CTA、布局表现</td><td>M3</td><td><code>模块测试报告_首页_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>关于我们</td><td>公司介绍、发展历程、资质与内容展示</td><td>M3</td><td><code>模块测试报告_关于我们_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>产品中心</td><td>分类、列表、详情、字段展示、跳转和内容回显</td><td>M3</td><td><code>模块测试报告_产品中心_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>解决方案</td><td>行业方案列表、详情、案例联动和 CTA</td><td>M3</td><td><code>模块测试报告_解决方案_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>联系我们 / 询盘</td><td>表单校验、提交、附件、后台查看、状态更新</td><td>M3</td><td><code>模块测试报告_询盘链路_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>招贤纳士 / 简历</td><td>岗位列表、详情、简历上传、后台查看</td><td>M3-M4</td><td><code>模块测试报告_招聘链路_日期</code></td><td>Ocean</td><td>P1</td></tr>
+          <tr><td>成功案例</td><td>列表、详情、筛选、公开边界和图文展示</td><td>M4</td><td><code>模块测试报告_成功案例_日期</code></td><td>Ocean</td><td>P1</td></tr>
+          <tr><td>工厂展示</td><td>图片、视频、设备与品质内容展示</td><td>M4</td><td><code>模块测试报告_工厂展示_日期</code></td><td>Ocean</td><td>P1</td></tr>
+          <tr><td>新闻资讯</td><td>分类、列表、详情、发布时间和富文本表现</td><td>M4</td><td><code>模块测试报告_新闻资讯_日期</code></td><td>Ocean</td><td>P1</td></tr>
+          <tr><td>技术支持</td><td>FAQ、资料、下载和内容分类管理</td><td>M4</td><td><code>模块测试报告_技术支持_日期</code></td><td>Ocean</td><td>P1</td></tr>
+          <tr><td>视频中心</td><td>封面、分类、播放链接和展示体验</td><td>M4</td><td><code>模块测试报告_视频中心_日期</code></td><td>Ocean</td><td>P2</td></tr>
+          <tr><td>后台认证与权限</td><td>登录、登出、菜单权限、接口鉴权</td><td>M2-M3</td><td><code>模块测试报告_后台认证权限_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>后台内容管理</td><td>新增、编辑、删除、发布、下架、排序和前台回显</td><td>M3-M4</td><td><code>模块测试报告_后台内容管理_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>文件中心</td><td>上传、预览、回显、引用和类型限制</td><td>M2-M4</td><td><code>模块测试报告_文件中心_日期</code></td><td>Ocean</td><td>P0</td></tr>
+          <tr><td>上线回归</td><td>跨模块主流程、内容准确性、兼容性和 SEO 基础</td><td>M4</td><td><code>总体验收报告_上线回归_日期</code></td><td>Ocean</td><td>P0</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>测试报告模板字段</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 26%;">字段</th>
+            <th style="width: 74%;">填写要求</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>报告名称</td><td>统一使用“模块测试报告_模块名_YYYY-MM-DD”格式。</td></tr>
+          <tr><td>模块名称</td><td>与本页模块矩阵保持一致。</td></tr>
+          <tr><td>测试日期</td><td>填写实际测试日期，必要时可包含回归日期。</td></tr>
+          <tr><td>测试责任人</td><td>当前统一填写 Ocean。</td></tr>
+          <tr><td>版本信息</td><td>记录测试对应的页面版本、接口版本或构建版本。</td></tr>
+          <tr><td>测试环境</td><td>记录本地、测试环境或预发布环境。</td></tr>
+          <tr><td>测试范围</td><td>说明本次覆盖了哪些页面、功能点或接口。</td></tr>
+          <tr><td>测试结果统计</td><td>记录总用例数、通过数、失败数、阻塞数。</td></tr>
+          <tr><td>缺陷清单</td><td>记录缺陷描述、严重级别、是否已修复、是否已回归。</td></tr>
+          <tr><td>结论</td><td>明确写“通过 / 有条件通过 / 不通过”。</td></tr>
+          <tr><td>后续动作</td><td>如需修复、回归或延后上线，必须写明下一步动作。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>建议报告结构</h2>
+      <div class="note">
+        建议每份模块测试报告至少包含以下结构：模块概述、测试范围、测试环境、测试结果统计、缺陷清单、回归结果、最终结论、后续动作。
+        如果某个模块只做了部分能力，也要在报告中明确“本次未覆盖范围”，避免默认等同于全部验收通过。
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>与项目进度的联动要求</h2>
+      <div class="grid-2">
+        <article class="panel">
+          <h3>联动更新</h3>
+          <ul>
+            <li>模块测试报告完成后，同步更新 23 号文档中的里程碑状态。</li>
+            <li>P0 模块未通过时，必须在风险清单中记录并跟踪。</li>
+            <li>总体验收报告通过后，才允许进入正式上线动作。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>缺陷处理</h3>
+          <ul>
+            <li>阻塞上线的缺陷必须先修复并回归，再更新报告结论。</li>
+            <li>不阻塞上线的已知问题，需要在报告中记录影响范围和后续计划。</li>
+            <li>如果某模块延期，不只改排期，还要同步调整测试窗口和报告日期。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="note">
+      这份文档定义的是测试机制，不是最终测试报告本身。后续进入 M3 和 M4 后，可以按本页模板继续生成具体模块测试报告。
+    </div>
+  </div>
+</body>
+</html>

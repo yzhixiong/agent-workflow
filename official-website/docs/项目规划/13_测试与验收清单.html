@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网测试与验收清单</title>
+  <style>
+    :root {
+      --bg: #f5f8f6; --text: #1f2a24; --muted: #5b6c63; --primary: #1f6745;
+      --soft: #edf7f0; --border: #d7e4dc; --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: radial-gradient(circle at top left, #e5f3ea 0, transparent 34%), radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%), var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1360px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; position: sticky; top: 0; z-index: 10;
+      background: rgba(245, 248, 246, 0.92); backdrop-filter: blur(8px); padding: 10px 0 6px;
+    }
+    .nav a { text-decoration: none; color: var(--primary); background: #fff; border: 1px solid var(--border); border-radius: 999px; padding: 8px 14px; font-size: 14px; }
+    .nav a.current { color: #fff; background: var(--primary); border-color: var(--primary); }
+    .hero { background: linear-gradient(135deg, #1f6b46, #2f8f57); color: #fff; border-radius: 26px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 18px; }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; max-width: 1020px; line-height: 1.85; font-size: 15px; opacity: 0.95; }
+    .section { background: #fff; border: 1px solid var(--border); border-radius: 22px; box-shadow: var(--shadow); padding: 22px; margin-bottom: 16px; }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid var(--border); padding: 12px 14px; text-align: left; vertical-align: top; font-size: 14px; line-height: 1.75; }
+    th { background: var(--soft); color: var(--primary); font-weight: 700; }
+    td { color: var(--muted); }
+    .note { background: #edf7f0; border: 1px solid #d1e7d8; border-radius: 18px; padding: 18px; color: var(--primary); line-height: 1.8; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a class="current" href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网测试与验收清单</h1>
+      <p>
+        本文档用于上线前的测试与验收，覆盖前台、后台、接口、内容、兼容性、SEO 和表单链路。
+        目标是确保官网不仅能展示，还能稳定运营和承接真实客户线索。
+        自 2026-03-19 项目启动后，测试策略统一升级为“按模块测试、按模块输出测试报告”。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>功能测试清单</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">测试项</th>
+            <th style="width: 44%;">检查内容</th>
+            <th style="width: 16%;">优先级</th>
+            <th style="width: 16%;">验收标准</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>前台导航</td><td>菜单跳转、语言切换、页脚链接、面包屑、返回逻辑是否正常</td><td>P0</td><td>无死链、无错跳</td></tr>
+          <tr><td>页面展示</td><td>首页、关于、产品、方案、案例、工厂、新闻、技术、视频、联系、招聘均能正常打开</td><td>P0</td><td>页面可访问、布局正常</td></tr>
+          <tr><td>后台登录</td><td>登录、退出、鉴权拦截、菜单显示、角色权限</td><td>P0</td><td>权限生效、登录态稳定</td></tr>
+          <tr><td>内容管理</td><td>新增、编辑、删除、发布、下架、排序等核心操作</td><td>P0</td><td>操作成功且前台同步展示</td></tr>
+          <tr><td>询盘链路</td><td>前台提交、后台查看、状态更新、附件查看</td><td>P0</td><td>全链路闭环可用</td></tr>
+          <tr><td>招聘链路</td><td>岗位展示、简历投递、后台查看、状态维护</td><td>P1</td><td>投递闭环可用</td></tr>
+          <tr><td>文件上传</td><td>图片、PDF、附件上传、预览、回显、引用</td><td>P0</td><td>上传成功且引用正确</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>非功能测试清单</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">测试项</th>
+            <th style="width: 44%;">检查内容</th>
+            <th style="width: 16%;">优先级</th>
+            <th style="width: 16%;">验收标准</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>响应式适配</td><td>桌面、平板、手机下布局、图片、表单、导航表现</td><td>P0</td><td>主流尺寸无明显错位</td></tr>
+          <tr><td>浏览器兼容</td><td>Chrome、Safari、Edge 最新主流版本浏览</td><td>P1</td><td>主要功能可用</td></tr>
+          <tr><td>性能</td><td>核心页面打开速度、图片加载、接口响应速度</td><td>P1</td><td>首页和关键页加载体验可接受</td></tr>
+          <tr><td>安全性</td><td>后台未登录访问拦截、输入校验、上传类型限制</td><td>P0</td><td>无明显安全缺陷</td></tr>
+          <tr><td>SEO 基础</td><td>title、description、URL、标题层级、可索引性</td><td>P1</td><td>关键页面 SEO 信息完整</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>内容验收清单</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">检查项</th>
+            <th style="width: 44%;">检查内容</th>
+            <th style="width: 16%;">优先级</th>
+            <th style="width: 16%;">验收标准</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>基础信息</td><td>公司名称、电话、邮箱、地址、备案号、地图是否准确</td><td>P0</td><td>与企业最新信息一致</td></tr>
+          <tr><td>中英文内容</td><td>中文和英文页面内容是否齐全、是否存在混排或错译</td><td>P0</td><td>关键页面双语完整</td></tr>
+          <tr><td>案例与图片</td><td>案例名称、图片、视频、证书是否可公开且清晰</td><td>P1</td><td>无侵权和保密风险</td></tr>
+          <tr><td>文案质量</td><td>错别字、语法、语义、专业术语一致性</td><td>P1</td><td>无明显错误</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>模块测试报告要求</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">模块</th>
+            <th style="width: 34%;">测试重点</th>
+            <th style="width: 20%;">输出要求</th>
+            <th style="width: 10%;">责任人</th>
+            <th style="width: 12%;">完成标准</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>前台公共模块</td><td>导航、页脚、语言切换、SEO 基础、响应式</td><td>输出独立测试报告</td><td>Ocean</td><td>通过后方可进入页面回归</td></tr>
+          <tr><td>首页 / 关于 / 产品 / 方案</td><td>页面展示、内容绑定、跳转、CTA 和加载体验</td><td>每个页面模块单独记录</td><td>Ocean</td><td>核心页面全部通过</td></tr>
+          <tr><td>联系我们 / 询盘链路</td><td>表单校验、提交、后台查看、状态更新、附件</td><td>输出链路测试报告</td><td>Ocean</td><td>形成完整闭环</td></tr>
+          <tr><td>招聘 / 简历链路</td><td>岗位展示、简历上传、后台查看、状态维护</td><td>输出链路测试报告</td><td>Ocean</td><td>P1 模块通过后可验收</td></tr>
+          <tr><td>后台认证与权限</td><td>登录、退出、鉴权、菜单显示、权限限制</td><td>输出后台权限测试报告</td><td>Ocean</td><td>权限行为符合预期</td></tr>
+          <tr><td>后台内容管理与文件中心</td><td>新增、编辑、删除、发布、上传、回显、引用</td><td>输出内容管理测试报告</td><td>Ocean</td><td>前后台联动正常</td></tr>
+          <tr><td>增强模块</td><td>案例、工厂、新闻、技术支持、视频等页面与后台配置</td><td>按模块分别出报告</td><td>Ocean</td><td>完成模块即出报告</td></tr>
+          <tr><td>上线回归</td><td>跨模块主流程、兼容性、内容准确性、SEO 基础</td><td>输出总体验收报告</td><td>Ocean</td><td>通过后方可上线</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      上线前至少要完成一次完整的“业务演练式验收”，即模拟客户浏览、提交询盘、后台查看、状态更新的全过程。
+      这样才能确认官网的真实转化能力，而不是只验证静态页面展示。
+      模块级测试报告的产出规范见《24_模块测试计划与测试报告规范》。
+    </div>
+  </div>
+</body>
+</html>

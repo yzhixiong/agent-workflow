@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网数据库表结构草案</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --soft: #edf7f0;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1360px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--primary); background: #fff; border: 1px solid var(--border);
+      border-radius: 999px; padding: 8px 14px; font-size: 14px;
+    }
+    .nav a.current { color: #fff; background: var(--primary); border-color: var(--primary); }
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff; border-radius: 26px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; max-width: 1020px; line-height: 1.85; font-size: 15px; opacity: 0.95; }
+    .section {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      box-shadow: var(--shadow); padding: 22px; margin-bottom: 16px;
+    }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      border: 1px solid var(--border); padding: 12px 14px; text-align: left; vertical-align: top;
+      font-size: 14px; line-height: 1.75;
+    }
+    th { background: var(--soft); color: var(--primary); font-weight: 700; }
+    td { color: var(--muted); }
+    .note {
+      background: #edf7f0; border: 1px solid #d1e7d8; border-radius: 18px;
+      padding: 18px; color: var(--primary); line-height: 1.8; font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a class="current" href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网数据库表结构草案</h1>
+      <p>
+        本草案面向官网前后台一体化场景，围绕“内容管理、站点配置、线索收集、招聘管理、权限控制、文件资产”六类数据展开。
+        目标是先把表结构边界和关系框架定义清楚，后续再根据开发实现补充索引、约束和枚举细节。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>核心主表建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">表名</th>
+            <th style="width: 22%;">用途</th>
+            <th style="width: 26%;">关键字段</th>
+            <th style="width: 18%;">关联对象</th>
+            <th style="width: 16%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>sys_user</td>
+            <td>后台账号表</td>
+            <td>id、username、password、nickname、status、last_login_at</td>
+            <td>sys_role</td>
+            <td>后台鉴权基础</td>
+          </tr>
+          <tr>
+            <td>sys_role</td>
+            <td>角色表</td>
+            <td>id、role_code、role_name、status、remark</td>
+            <td>sys_menu、sys_permission</td>
+            <td>支持 RBAC</td>
+          </tr>
+          <tr>
+            <td>sys_menu</td>
+            <td>后台菜单表</td>
+            <td>id、parent_id、menu_name、path、component、sort_no、visible</td>
+            <td>sys_role_menu</td>
+            <td>菜单可配置</td>
+          </tr>
+          <tr>
+            <td>sys_role_menu</td>
+            <td>角色菜单关联表</td>
+            <td>id、role_id、menu_id</td>
+            <td>sys_role、sys_menu</td>
+            <td>多对多关系</td>
+          </tr>
+          <tr>
+            <td>sys_permission</td>
+            <td>权限点表</td>
+            <td>id、permission_code、permission_name、permission_type、status</td>
+            <td>sys_role_permission</td>
+            <td>用于按钮级或操作级权限</td>
+          </tr>
+          <tr>
+            <td>sys_role_permission</td>
+            <td>角色权限点关联表</td>
+            <td>id、role_id、permission_id</td>
+            <td>sys_role、sys_permission</td>
+            <td>支持页面操作权限授权</td>
+          </tr>
+          <tr>
+            <td>cms_site_config</td>
+            <td>站点全局配置</td>
+            <td>id、site_name、site_name_en、logo_file_id、contact_phone、email、address、备案号</td>
+            <td>cms_file_asset</td>
+            <td>单例配置表</td>
+          </tr>
+          <tr>
+            <td>cms_page_seo</td>
+            <td>页面 SEO 配置</td>
+            <td>id、page_code、lang、title、keywords、description、slug</td>
+            <td>页面实体</td>
+            <td>统一 SEO 配置</td>
+          </tr>
+          <tr>
+            <td>cms_banner</td>
+            <td>首页 Banner</td>
+            <td>id、lang、title、subtitle、image_file_id、link_url、sort_no、status</td>
+            <td>cms_file_asset</td>
+            <td>首页运营内容</td>
+          </tr>
+          <tr>
+            <td>cms_content_block</td>
+            <td>通用内容块表</td>
+            <td>id、block_code、lang、title、subtitle、content_html、status</td>
+            <td>可关联多页面</td>
+            <td>适合公司简介等</td>
+          </tr>
+          <tr>
+            <td>cms_product_category</td>
+            <td>产品分类表</td>
+            <td>id、parent_id、name_zh、name_en、slug、sort_no、status</td>
+            <td>cms_product</td>
+            <td>支持多级分类</td>
+          </tr>
+          <tr>
+            <td>cms_product</td>
+            <td>产品/工艺能力表</td>
+            <td>id、category_id、name_zh、name_en、cover_file_id、summary_zh、summary_en、status</td>
+            <td>cms_product_detail、cms_file_asset</td>
+            <td>列表主表</td>
+          </tr>
+          <tr>
+            <td>cms_product_detail</td>
+            <td>产品详情扩展表</td>
+            <td>product_id、material_text、color_text、performance_text、application_text、faq_html</td>
+            <td>cms_product</td>
+            <td>详情字段可扩展</td>
+          </tr>
+          <tr>
+            <td>cms_solution</td>
+            <td>解决方案表</td>
+            <td>id、solution_code、name_zh、name_en、cover_file_id、pain_points_html、advantages_html、status</td>
+            <td>cms_solution_product、cms_solution_case</td>
+            <td>按行业组织</td>
+          </tr>
+          <tr>
+            <td>cms_case</td>
+            <td>成功案例表</td>
+            <td>id、industry_code、title_zh、title_en、cover_file_id、summary_zh、summary_en、is_top、status</td>
+            <td>cms_case_gallery</td>
+            <td>支持匿名案例</td>
+          </tr>
+          <tr>
+            <td>cms_case_gallery</td>
+            <td>案例图片表</td>
+            <td>id、case_id、file_id、sort_no</td>
+            <td>cms_case、cms_file_asset</td>
+            <td>案例图集</td>
+          </tr>
+          <tr>
+            <td>cms_news_category</td>
+            <td>新闻分类表</td>
+            <td>id、name_zh、name_en、sort_no、status</td>
+            <td>cms_news</td>
+            <td>公司新闻/行业资讯/公告</td>
+          </tr>
+          <tr>
+            <td>cms_news</td>
+            <td>新闻文章表</td>
+            <td>id、category_id、title_zh、title_en、cover_file_id、content_zh、content_en、published_at、status</td>
+            <td>cms_file_asset</td>
+            <td>富文本内容</td>
+          </tr>
+          <tr>
+            <td>cms_video</td>
+            <td>视频内容表</td>
+            <td>id、title_zh、title_en、cover_file_id、video_url、duration_sec、status</td>
+            <td>cms_file_asset</td>
+            <td>可挂外链或存储地址</td>
+          </tr>
+          <tr>
+            <td>cms_job</td>
+            <td>招聘岗位表</td>
+            <td>id、title_zh、title_en、department、location、content_zh、content_en、status</td>
+            <td>hr_resume</td>
+            <td>岗位管理主表</td>
+          </tr>
+          <tr>
+            <td>lead_inquiry</td>
+            <td>询盘表</td>
+            <td>id、company_name、contact_name、email、phone、country、inquiry_type、content、status</td>
+            <td>lead_inquiry_file</td>
+            <td>核心线索表</td>
+          </tr>
+          <tr>
+            <td>lead_inquiry_file</td>
+            <td>询盘附件表</td>
+            <td>id、inquiry_id、file_id</td>
+            <td>lead_inquiry、cms_file_asset</td>
+            <td>支持多附件</td>
+          </tr>
+          <tr>
+            <td>hr_resume</td>
+            <td>简历投递表</td>
+            <td>id、job_id、name、phone、email、intro_text、resume_file_id、status</td>
+            <td>cms_job、cms_file_asset</td>
+            <td>招聘线索表</td>
+          </tr>
+          <tr>
+            <td>cms_file_asset</td>
+            <td>文件资源表</td>
+            <td>id、file_name、file_type、storage_path、file_size、mime_type、biz_type、created_by</td>
+            <td>多表复用</td>
+            <td>统一文件中心</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>关键关系建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 30%;">关系</th>
+            <th style="width: 40%;">说明</th>
+            <th style="width: 30%;">设计建议</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>角色 N:N 权限点</td>
+            <td>角色与按钮/操作权限点应支持多对多关联。</td>
+            <td>增加 sys_role_permission 关联表。</td>
+          </tr>
+          <tr>
+            <td>产品分类 1:N 产品</td>
+            <td>一个产品分类下可有多个产品或工艺能力条目。</td>
+            <td>category_id 外键，支持排序。</td>
+          </tr>
+          <tr>
+            <td>产品 1:1 产品详情</td>
+            <td>列表基础信息与详情长字段分离，便于维护。</td>
+            <td>详情表以 product_id 唯一关联。</td>
+          </tr>
+          <tr>
+            <td>解决方案 N:N 产品</td>
+            <td>一个方案可关联多个产品，一个产品也可出现在多个方案中。</td>
+            <td>增加 cms_solution_product 关联表。</td>
+          </tr>
+          <tr>
+            <td>解决方案 N:N 案例</td>
+            <td>方案页可展示多个典型案例。</td>
+            <td>增加 cms_solution_case 关联表。</td>
+          </tr>
+          <tr>
+            <td>案例 1:N 图集</td>
+            <td>案例详情通常包含多张展示图。</td>
+            <td>独立图集表，支持排序。</td>
+          </tr>
+          <tr>
+            <td>询盘 1:N 附件</td>
+            <td>客户可能上传多个需求附件。</td>
+            <td>单独附件关联表。</td>
+          </tr>
+          <tr>
+            <td>岗位 1:N 简历</td>
+            <td>一个岗位下存在多个投递记录。</td>
+            <td>resume.job_id 关联岗位。</td>
+          </tr>
+          <tr>
+            <td>文件资源 1:N 业务引用</td>
+            <td>图片、视频封面、PDF、简历、Banner 均统一走文件资产表。</td>
+            <td>各业务表只存 file_id。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>通用字段建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">字段类型</th>
+            <th style="width: 38%;">建议字段</th>
+            <th style="width: 40%;">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>主键字段</td>
+            <td>id</td>
+            <td>建议使用 bigint 或雪花 ID。</td>
+          </tr>
+          <tr>
+            <td>状态字段</td>
+            <td>status、is_deleted</td>
+            <td>支持启用/禁用、逻辑删除。</td>
+          </tr>
+          <tr>
+            <td>排序字段</td>
+            <td>sort_no</td>
+            <td>Banner、分类、案例、新闻等建议统一。</td>
+          </tr>
+          <tr>
+            <td>多语言字段</td>
+            <td>name_zh、name_en / title_zh、title_en</td>
+            <td>优先用显式字段，简单清晰。</td>
+          </tr>
+          <tr>
+            <td>审计字段</td>
+            <td>created_at、created_by、updated_at、updated_by</td>
+            <td>建议所有后台维护类表统一具备。</td>
+          </tr>
+          <tr>
+            <td>SEO 字段</td>
+            <td>slug / seo 关联表</td>
+            <td>文章、产品、方案建议支持 URL 别名。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      数据库设计建议优先保证可维护性和清晰边界，不要过早抽象成过度通用模型。
+      对官网这类企业站，先把核心业务对象拆清楚，比追求万能 CMS 模型更重要。
+      权限模型建议首期落地到“菜单级 + 页面操作级”，数据权限和字段权限暂作为后续扩展保留。
+    </div>
+  </div>
+</body>
+</html>

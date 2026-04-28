@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网PRD功能清单</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --secondary: #2f8f57;
+      --soft: #edf7f0;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1320px, 94%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 980px;
+      line-height: 1.85;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    th {
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+      background: #fff;
+    }
+
+    .note {
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--primary);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .wrap {
+        width: 96%;
+      }
+
+      th,
+      td {
+        font-size: 13px;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a class="current" href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网 PRD 功能清单</h1>
+      <p>
+        本文档用于将前台官网、后台管理和公共能力整理为可执行的产品功能清单。
+        文档重点强调范围边界、转化链路、内容可维护性和实施优先级，为后续数据库设计、接口规划和开发任务拆解提供基础。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>前台功能清单</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">功能模块</th>
+            <th style="width: 36%;">功能说明</th>
+            <th style="width: 18%;">关键点</th>
+            <th style="width: 12%;">优先级</th>
+            <th style="width: 16%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>首页展示</td>
+            <td>展示品牌定位、核心优势、业务方向、案例预览、工厂实力、新闻预览和联系入口。</td>
+            <td>首屏表达清晰、强 CTA、支持中英文。</td>
+            <td>P0</td>
+            <td>核心入口页。</td>
+          </tr>
+          <tr>
+            <td>关于我们</td>
+            <td>展示公司简介、发展历程、荣誉资质、企业文化、合作客户等内容。</td>
+            <td>建立企业可信度。</td>
+            <td>P0</td>
+            <td>承接品牌信任。</td>
+          </tr>
+          <tr>
+            <td>产品中心</td>
+            <td>支持按分类展示产品或工艺能力，包含列表页和详情页。</td>
+            <td>标准化字段、支持图片、应用场景、咨询按钮。</td>
+            <td>P0</td>
+            <td>旧站内容需重构。</td>
+          </tr>
+          <tr>
+            <td>解决方案</td>
+            <td>按行业展示场景方案，如智能穿戴、消费电子、传统五金、汽车、医疗等。</td>
+            <td>行业痛点、推荐工艺、案例联动、表单承接。</td>
+            <td>P0</td>
+            <td>核心转化页。</td>
+          </tr>
+          <tr>
+            <td>成功案例</td>
+            <td>案例列表、案例详情、行业筛选、图文介绍。</td>
+            <td>真实案例、可公开范围需确认。</td>
+            <td>P1</td>
+            <td>增强信任。</td>
+          </tr>
+          <tr>
+            <td>工厂展示</td>
+            <td>展示工厂环境、设备、自动化产线、品质实验室、生产流程。</td>
+            <td>图片和视频优先于大段文字。</td>
+            <td>P1</td>
+            <td>制造业官网重点页。</td>
+          </tr>
+          <tr>
+            <td>新闻资讯</td>
+            <td>支持公司新闻、行业资讯、公告通知列表和详情展示。</td>
+            <td>分类管理、发布时间、富文本详情。</td>
+            <td>P1</td>
+            <td>支撑 SEO 与更新。</td>
+          </tr>
+          <tr>
+            <td>技术支持</td>
+            <td>展示工艺介绍、检测标准、FAQ、下载资料等内容。</td>
+            <td>结构化知识沉淀。</td>
+            <td>P1</td>
+            <td>可持续扩展。</td>
+          </tr>
+          <tr>
+            <td>视频中心</td>
+            <td>展示企业宣传片、工艺视频、产线视频和案例视频。</td>
+            <td>视频封面、分类、播放方式。</td>
+            <td>P2</td>
+            <td>可后补素材。</td>
+          </tr>
+          <tr>
+            <td>联系我们</td>
+            <td>展示联系方式、地图、在线询盘表单。</td>
+            <td>全站转化承接、提交成功反馈。</td>
+            <td>P0</td>
+            <td>最重要转化页。</td>
+          </tr>
+          <tr>
+            <td>招贤纳士</td>
+            <td>展示岗位列表、岗位详情、简历投递表单。</td>
+            <td>附件上传、岗位关联。</td>
+            <td>P1</td>
+            <td>招聘转化页。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>后台功能清单</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">功能模块</th>
+            <th style="width: 36%;">功能说明</th>
+            <th style="width: 18%;">关键点</th>
+            <th style="width: 12%;">优先级</th>
+            <th style="width: 16%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>登录与权限</td>
+            <td>后台账号登录、退出、角色与权限控制。</td>
+            <td>管理员、编辑、招聘/销售可扩展。</td>
+            <td>P0</td>
+            <td>所有后台基础。</td>
+          </tr>
+          <tr>
+            <td>站点配置</td>
+            <td>维护站点标题、联系方式、页脚、备案、社媒、语言配置等。</td>
+            <td>支持统一配置，避免写死。</td>
+            <td>P0</td>
+            <td>全局配置项。</td>
+          </tr>
+          <tr>
+            <td>首页配置</td>
+            <td>维护首页 Banner、核心数据、业务入口、案例预览、联系信息等。</td>
+            <td>模块化配置、排序控制。</td>
+            <td>P0</td>
+            <td>便于运营更新。</td>
+          </tr>
+          <tr>
+            <td>关于我们管理</td>
+            <td>维护公司介绍、发展历程、资质证书、企业文化等。</td>
+            <td>支持多图、富文本、中英文。</td>
+            <td>P0</td>
+            <td>品牌内容维护。</td>
+          </tr>
+          <tr>
+            <td>产品管理</td>
+            <td>维护产品分类、产品详情、材质、颜色、性能、应用场景。</td>
+            <td>分类与详情分离、支持上下架。</td>
+            <td>P0</td>
+            <td>建议字段化设计。</td>
+          </tr>
+          <tr>
+            <td>解决方案管理</td>
+            <td>维护行业方案、场景描述、推荐工艺、关联产品与案例。</td>
+            <td>支持关联内容。</td>
+            <td>P0</td>
+            <td>转化价值高。</td>
+          </tr>
+          <tr>
+            <td>案例管理</td>
+            <td>维护案例列表、行业分类、封面图、详情和排序。</td>
+            <td>支持置顶、行业筛选。</td>
+            <td>P1</td>
+            <td>可扩展匿名案例。</td>
+          </tr>
+          <tr>
+            <td>工厂展示管理</td>
+            <td>维护工厂图片、设备介绍、实验室和产线内容。</td>
+            <td>图文组合展示。</td>
+            <td>P1</td>
+            <td>偏内容模块。</td>
+          </tr>
+          <tr>
+            <td>新闻管理</td>
+            <td>维护新闻分类、列表、详情、发布时间、上下架。</td>
+            <td>富文本、封面图、SEO 字段。</td>
+            <td>P1</td>
+            <td>支撑 SEO。</td>
+          </tr>
+          <tr>
+            <td>技术支持管理</td>
+            <td>维护技术文章、FAQ、下载资料。</td>
+            <td>结构化问答和附件支持。</td>
+            <td>P1</td>
+            <td>后续 SEO 积累点。</td>
+          </tr>
+          <tr>
+            <td>视频管理</td>
+            <td>维护视频分类、封面、简介、播放链接或文件地址。</td>
+            <td>封面与链接统一管理。</td>
+            <td>P2</td>
+            <td>可首期简化。</td>
+          </tr>
+          <tr>
+            <td>招聘管理</td>
+            <td>维护岗位分类、岗位详情、上下架状态。</td>
+            <td>岗位与简历关联。</td>
+            <td>P1</td>
+            <td>HR 可用。</td>
+          </tr>
+          <tr>
+            <td>简历管理</td>
+            <td>查看投递简历、下载附件、标记状态、记录备注。</td>
+            <td>附件安全与状态维护。</td>
+            <td>P1</td>
+            <td>招聘闭环。</td>
+          </tr>
+          <tr>
+            <td>询盘管理</td>
+            <td>查看客户询盘、状态维护、备注跟进、导出预留。</td>
+            <td>支持附件和来源字段。</td>
+            <td>P0</td>
+            <td>销售线索闭环。</td>
+          </tr>
+          <tr>
+            <td>文件管理</td>
+            <td>统一管理图片、视频、PDF、附件资源。</td>
+            <td>文件分类、路径、引用追踪。</td>
+            <td>P0</td>
+            <td>全局能力。</td>
+          </tr>
+          <tr>
+            <td>SEO 管理</td>
+            <td>维护页面 title、description、keywords、URL 别名等。</td>
+            <td>页面级可配置。</td>
+            <td>P1</td>
+            <td>建议统一封装。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>公共能力与业务规则</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">类别</th>
+            <th style="width: 40%;">说明</th>
+            <th style="width: 20%;">要求</th>
+            <th style="width: 20%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>多语言</td>
+            <td>中文、英文内容独立维护，前台支持切换。</td>
+            <td>P0</td>
+            <td>避免中英混排。</td>
+          </tr>
+          <tr>
+            <td>响应式</td>
+            <td>适配桌面端、平板、移动端。</td>
+            <td>P0</td>
+            <td>制造业客户常用手机查看。</td>
+          </tr>
+          <tr>
+            <td>表单提交</td>
+            <td>询盘和简历表单需有校验、成功提示、后台入库。</td>
+            <td>P0</td>
+            <td>核心转化链路。</td>
+          </tr>
+          <tr>
+            <td>上传能力</td>
+            <td>支持图片、PDF、简历附件等上传。</td>
+            <td>P0</td>
+            <td>需限制类型和大小。</td>
+          </tr>
+          <tr>
+            <td>内容状态</td>
+            <td>支持草稿、发布、下架或启用、禁用。</td>
+            <td>P1</td>
+            <td>便于运营审核。</td>
+          </tr>
+          <tr>
+            <td>排序能力</td>
+            <td>Banner、产品、案例、新闻等支持排序。</td>
+            <td>P1</td>
+            <td>首页运营需要。</td>
+          </tr>
+          <tr>
+            <td>安全性</td>
+            <td>后台接口鉴权、输入校验、文件安全控制。</td>
+            <td>P0</td>
+            <td>基础要求。</td>
+          </tr>
+          <tr>
+            <td>SEO</td>
+            <td>页面标题、描述、关键词、语义化结构可控。</td>
+            <td>P1</td>
+            <td>需和前端渲染方案联动。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      这份功能清单已经与后续的数据库、接口、后台菜单、测试和上线文档形成闭环。
+      审核时建议重点关注功能边界、优先级划分和后台是否真正服务于官网运营。
+    </div>
+  </div>
+</body>
+</html>

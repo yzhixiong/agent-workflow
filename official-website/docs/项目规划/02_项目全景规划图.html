@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网项目全景规划图</title>
+  <style>
+    :root {
+      --bg: #f6f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5d6d64;
+      --primary: #205f46;
+      --secondary: #2f8f57;
+      --soft: #ebf5ef;
+      --soft-2: #f7fbf8;
+      --border: #d8e4dd;
+      --shadow: 0 12px 28px rgba(26, 77, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, #e4f2e9 0, transparent 34%),
+        radial-gradient(circle at bottom right, #eef7f1 0, transparent 26%),
+        var(--bg);
+      color: var(--text);
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .wrap {
+      width: min(1240px, 92%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .hero-main,
+    .hero-side {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 30px;
+      background: linear-gradient(140deg, #1f6847, #2f8f57);
+      color: #fff;
+      border: none;
+    }
+
+    .hero-main h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero-main p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.85;
+      opacity: 0.95;
+    }
+
+    .hero-side {
+      padding: 24px;
+      background: linear-gradient(180deg, #ffffff, #f7fbf8);
+    }
+
+    .hero-side h3 {
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .overview-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .overview-card h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .overview-card p,
+    .overview-card li {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .overview-card ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .map {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .cluster {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .cluster h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 22px;
+    }
+
+    .block-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .block {
+      background: var(--soft-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .block h3 {
+      margin: 0 0 10px;
+      color: var(--secondary);
+      font-size: 16px;
+    }
+
+    .block ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+      background: linear-gradient(180deg, #eff8f2, #f8fcf9);
+    }
+
+    .deliverables {
+      margin-top: 16px;
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+
+    .deliverables h2 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 22px;
+    }
+
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .deliverable {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid #d5e7db;
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .deliverable strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .deliverable p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .hero,
+      .overview,
+      .map,
+      .deliverables-grid,
+      .block-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero,
+      .overview,
+      .map,
+      .deliverables-grid,
+      .block-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a class="current" href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-main">
+        <h1>官网项目全景规划图</h1>
+        <p>
+          项目全景规划围绕“品牌、内容、系统、转化、交付”五个维度展开。
+          目标是将现有官网中的工艺与设备能力重组为一套面向海内外客户的现代制造业官网，并同步建设可运营的后台系统。
+        </p>
+      </div>
+      <div class="hero-side">
+        <h3>项目定位</h3>
+        <ul>
+          <li>项目名称： Tritree 官网系统</li>
+          <li>项目类型：企业品牌官网 + 内容管理后台</li>
+          <li>目标周期：2 个月</li>
+          <li>目标结果：品牌展示、能力表达、线索转化、长期运营</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="overview">
+      <article class="overview-card">
+        <h2>核心目标</h2>
+        <ul>
+          <li>统一 / Tritree 对外品牌形象</li>
+          <li>展示真空镀膜与表面处理能力</li>
+          <li>承接海内外客户询盘</li>
+          <li>支持招聘与简历投递</li>
+        </ul>
+      </article>
+      <article class="overview-card">
+        <h2>目标用户</h2>
+        <ul>
+          <li>国内有镀膜需求的企业客户</li>
+          <li>海外 B 端采购与工程客户</li>
+          <li>关注工艺与交付能力的合作伙伴</li>
+          <li>求职者与候选人</li>
+        </ul>
+      </article>
+      <article class="overview-card">
+        <h2>核心转化</h2>
+        <ul>
+          <li>在线询盘表单提交</li>
+          <li>产品页与方案页咨询</li>
+          <li>电话 / 邮箱 / 地图联系</li>
+          <li>在线简历投递</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="map">
+      <article class="cluster">
+        <h2>前台系统规划</h2>
+        <div class="block-grid">
+          <section class="block">
+            <h3>品牌与信任</h3>
+            <ul>
+              <li>首页</li>
+              <li>关于我们</li>
+              <li>工厂展示</li>
+              <li>成功案例</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>业务与能力</h3>
+            <ul>
+              <li>产品中心</li>
+              <li>解决方案</li>
+              <li>技术支持</li>
+              <li>视频中心</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>运营与更新</h3>
+            <ul>
+              <li>新闻资讯</li>
+              <li>公告通知</li>
+              <li>多语言展示</li>
+              <li>SEO 页面配置</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>转化与触达</h3>
+            <ul>
+              <li>联系我们</li>
+              <li>在线询盘</li>
+              <li>招贤纳士</li>
+              <li>简历投递</li>
+            </ul>
+          </section>
+          <section class="block full">
+            <h3>前台建设原则</h3>
+            <ul>
+              <li>先讲行业场景，再讲工艺能力，最后承接询盘</li>
+              <li>中英文内容独立组织，避免混排影响阅读和 SEO</li>
+              <li>工厂、品质、案例页面承担信任建立职责</li>
+              <li>首页、产品页、解决方案页、联系我们页为核心转化页面</li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="cluster">
+        <h2>后台系统规划</h2>
+        <div class="block-grid">
+          <section class="block">
+            <h3>基础管理</h3>
+            <ul>
+              <li>登录与权限</li>
+              <li>菜单与角色</li>
+              <li>站点配置</li>
+              <li>SEO 配置</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>内容管理</h3>
+            <ul>
+              <li>首页配置</li>
+              <li>关于我们管理</li>
+              <li>产品 / 方案 / 案例管理</li>
+              <li>新闻 / 技术 / 视频管理</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>线索管理</h3>
+            <ul>
+              <li>询盘列表与状态管理</li>
+              <li>客户来源记录</li>
+              <li>备注与跟进</li>
+              <li>导出与统计预留</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>招聘管理</h3>
+            <ul>
+              <li>岗位发布</li>
+              <li>岗位上下架</li>
+              <li>简历管理</li>
+              <li>附件查看与状态维护</li>
+            </ul>
+          </section>
+          <section class="block full">
+            <h3>后台建设原则</h3>
+            <ul>
+              <li>后台首先服务于内容维护与线索管理，不做无关的复杂业务系统</li>
+              <li>所有前台核心内容必须能在后台配置，不依赖开发手工改文案</li>
+              <li>文件、图片、视频、PDF 等资产统一管理，避免内容分散</li>
+              <li>为多语言、SEO 和未来扩展预留基础数据结构</li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="cluster">
+        <h2>内容资产规划</h2>
+        <div class="block-grid">
+          <section class="block">
+            <h3>现有可复用资产</h3>
+            <ul>
+              <li>公司简介与发展背景</li>
+              <li>真空镀膜工艺说明</li>
+              <li>设备与自动化能力说明</li>
+              <li>质量检测与品质体系内容</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>需重点补充资产</h3>
+            <ul>
+              <li>工厂实景图与设备图</li>
+              <li>成功案例图文资料</li>
+              <li>招聘岗位与 HR 文案</li>
+              <li>中英文品牌文案</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>结构化沉淀方向</h3>
+            <ul>
+              <li>产品中心标准化字段</li>
+              <li>解决方案按行业组织</li>
+              <li>FAQ 与技术文章沉淀</li>
+              <li>新闻与公告独立维护</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>内容治理要求</h3>
+            <ul>
+              <li>中英内容分别维护</li>
+              <li>图片、视频、PDF 可追踪</li>
+              <li>首页内容可配置</li>
+              <li>关键页面有明确 CTA</li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="cluster">
+        <h2>技术与交付规划</h2>
+        <div class="block-grid">
+          <section class="block">
+            <h3>技术架构</h3>
+            <ul>
+              <li>Spring Boot</li>
+              <li>Nuxt 3（前台官网）</li>
+              <li>Vue（后台管理）</li>
+              <li>MySQL</li>
+              <li>Redis</li>
+              <li>文件存储</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>非功能目标</h3>
+            <ul>
+              <li>响应式适配桌面与移动端</li>
+              <li>关键页面支持 SEO</li>
+              <li>后台可维护性高</li>
+              <li>上线后可持续扩展</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>实施节奏</h3>
+            <ul>
+              <li>规划与设计</li>
+              <li>原型与技术方案</li>
+              <li>前后台开发</li>
+              <li>联调、测试、上线</li>
+            </ul>
+          </section>
+          <section class="block">
+            <h3>风险控制点</h3>
+            <ul>
+              <li>素材不齐会拖慢上线</li>
+              <li>多语言内容需尽早准备</li>
+              <li>案例真实性与可展示范围需确认</li>
+              <li>SEO 路线已确定为 Nuxt 3 SSR/混合渲染</li>
+            </ul>
+          </section>
+        </div>
+      </article>
+    </section>
+
+    <section class="deliverables">
+      <h2>规划交付物</h2>
+      <div class="deliverables-grid">
+        <article class="deliverable">
+          <strong>官网前台</strong>
+          <p>覆盖品牌展示、业务表达、工厂信任、客户转化等完整场景。</p>
+        </article>
+        <article class="deliverable">
+          <strong>管理后台</strong>
+          <p>支持日常更新首页、产品、方案、案例、新闻、招聘等内容。</p>
+        </article>
+        <article class="deliverable">
+          <strong>线索系统</strong>
+          <p>完成询盘和简历两类线索收集、查看、状态维护与后续跟进。</p>
+        </article>
+        <article class="deliverable">
+          <strong>文档资产</strong>
+          <p>沉淀规划、功能、数据、接口、部署等文档，支撑交付与迭代。</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

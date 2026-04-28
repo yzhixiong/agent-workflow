@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网联合审核版汇总</title>
+  <style>
+    :root {
+      --bg: #f3f7f3;
+      --card: rgba(255, 255, 255, 0.92);
+      --text: #1d2a23;
+      --muted: #5e6e65;
+      --primary: #1d6846;
+      --secondary: #2f8f57;
+      --accent: #d6efe0;
+      --border: #d7e5dc;
+      --shadow: 0 18px 38px rgba(20, 74, 45, 0.10);
+      --warning: #fff7e8;
+      --warning-border: #f1d8a8;
+      --danger: #fff1f1;
+      --danger-border: #efc9c9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #e2f0e7 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        linear-gradient(180deg, #f7faf7 0, #f3f7f3 100%);
+    }
+
+    .wrap {
+      width: min(1240px, 92%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(243, 247, 243, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      box-shadow: 0 4px 14px rgba(20, 74, 45, 0.04);
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      padding: 34px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(14, 82, 49, 0.92), rgba(47, 143, 87, 0.92)),
+        linear-gradient(120deg, #1d6846, #2f8f57);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -60px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.10);
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 36px;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 860px;
+      line-height: 1.9;
+      font-size: 15px;
+      opacity: 0.96;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 18px 0;
+    }
+
+    .metric {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--primary);
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 25px;
+    }
+
+    .section p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .summary-board {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: #fbfdfb;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .scope-card {
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff, #f8fbf9);
+    }
+
+    .scope-card h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 19px;
+    }
+
+    .scope-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .phase {
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      background: #fbfdfb;
+    }
+
+    .phase strong {
+      display: block;
+      color: var(--primary);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .phase span {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .phase p {
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    th {
+      background: #eef7f1;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    .status-good {
+      background: #eef8f1;
+    }
+
+    .status-warn {
+      background: var(--warning);
+    }
+
+    .status-risk {
+      background: var(--danger);
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .decision {
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid var(--warning-border);
+      background: var(--warning);
+    }
+
+    .decision h3 {
+      margin: 0 0 8px;
+      color: #946200;
+      font-size: 18px;
+    }
+
+    .decision p {
+      color: #7b6023;
+    }
+
+    .note {
+      margin-top: 16px;
+      border-radius: 20px;
+      padding: 18px 20px;
+      background: linear-gradient(180deg, #edf7f0, #f7fbf8);
+      border: 1px solid #d4e8db;
+      color: var(--primary);
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .source {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      background: #fbfdfb;
+    }
+
+    .source h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 17px;
+    }
+
+    .source ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .source a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    @media (max-width: 1100px) {
+      .overview,
+      .timeline,
+      .source-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .summary-board,
+      .two-col,
+      .scope-grid,
+      .decision-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .overview,
+      .timeline,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+      <a class="current" href="./20_联合审核版汇总.html">联合审核版汇总</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网联合审核版汇总</h1>
+      <p>
+        这是一份面向管理层的压缩版总报告，用于替代逐份阅读规划文档。
+        结论是：项目目标、范围、实施路径、技术方向和交付边界已经基本明确，整套文档经过两轮审查与修复闭环记录后，已具备进入联合评审与最终确认阶段的条件。
+        当前真正影响项目推进的，不是技术实现，而是范围冻结、内容准备、公开边界和关键口径决策。
+      </p>
+      <div class="hero-badges">
+        <span class="badge">管理层阅读版</span>
+        <span class="badge">联合评审入口页</span>
+        <span class="badge">基于规划与管控主文档压缩</span>
+      </div>
+    </section>
+
+    <section class="overview">
+      <article class="metric">
+        <strong>2个月</strong>
+        <span>项目总周期，按 4 个阶段推进，目标是形成可运营、可维护、可扩展的官网系统。</span>
+      </article>
+      <article class="metric">
+        <strong>前后台一体</strong>
+        <span>不是单纯做静态展示页，而是同步建设品牌官网、内容后台、询盘与招聘链路。</span>
+      </article>
+      <article class="metric">
+        <strong>2轮审核 + 2轮修复</strong>
+        <span>文档一致性问题已基本收敛，导航和 HTML 浏览链路已统一。</span>
+      </article>
+      <article class="metric">
+        <strong>4项 P0 决策</strong>
+        <span>英文范围、案例边界、SEO 路线已确认，当前仅首页数据口径待补。</span>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2>管理结论</h2>
+      <div class="summary-board">
+        <article class="panel">
+          <h3>可以确认的判断</h3>
+          <ul>
+            <li>项目定位清晰：面向海内外客户的品牌官网系统，同时承担内容运营与线索转化职责。</li>
+            <li>首期范围可控：核心交付围绕品牌展示、产品与方案表达、询盘收集、后台内容维护展开。</li>
+            <li>两个月节奏可行：前提是坚持 P0/P1 范围管理，并从第 2 周开始同步推进内容与素材准备。</li>
+            <li>文档成熟度可接受：首轮与二轮审核提出的问题已完成修正，当前可以进入联合评审。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>管理层现在需要关注什么</h3>
+          <ul>
+            <li>是否接受“首期先做够用的官网运营系统”，避免后台无限扩张。</li>
+            <li>是否授权按 2 个月排期推进，并在 M1 后严格控制新增需求。</li>
+            <li>是否明确业务、品牌、销售、HR、运维的内容与决策责任人。</li>
+            <li>是否把项目目标定义为“能上线、能维护、能承接真实线索”，而不是仅完成页面视觉改版。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>项目目标与商业价值</h2>
+      <div class="two-col">
+        <article class="panel">
+          <h3>项目目标</h3>
+          <ul>
+            <li>统一 / Tritree 对外品牌形象，提升官网专业度和信任感。</li>
+            <li>重构产品、工艺、方案、案例等内容表达，突出制造能力与行业理解。</li>
+            <li>承接国内外客户询盘，形成可追踪的销售线索入口。</li>
+            <li>支持岗位发布与简历投递，补齐招聘触点。</li>
+            <li>建设后台，确保上线后内容可持续维护，不依赖开发改文案。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>预期价值</h3>
+          <ul>
+            <li>品牌价值：官网从“资料堆叠”升级为“可信的品牌与能力展示窗口”。</li>
+            <li>业务价值：让首页、产品页、方案页、联系我们页直接承担转化职责。</li>
+            <li>组织价值：把产品、案例、新闻、SEO、招聘等内容沉淀为结构化资产。</li>
+            <li>长期价值：形成后续国际站、多语言扩展和持续运营的基础设施。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>首期交付范围</h2>
+      <div class="scope-grid">
+        <article class="scope-card">
+          <h3>P0 必须交付</h3>
+          <ul>
+            <li>前台：首页、关于我们、产品中心、解决方案、联系我们。</li>
+            <li>核心链路：在线询盘提交、后台查看与状态更新、文件上传。</li>
+            <li>后台：登录鉴权、菜单权限、站点配置、首页配置、产品与方案管理、询盘管理。</li>
+            <li>公共能力：中英文字段结构、响应式、基础 SEO、统一文件中心。</li>
+            <li>上线保障：测试验收清单、部署清单、上线后巡检与回滚准备。</li>
+          </ul>
+        </article>
+        <article class="scope-card">
+          <h3>P1 / P2 可增强交付</h3>
+          <ul>
+            <li>P1：成功案例、工厂展示、新闻资讯、技术支持、招聘管理、简历管理、SEO 运营能力。</li>
+            <li>P2：视频中心及更丰富的媒体内容。</li>
+            <li>权限原则：首期做到菜单级和页面操作级即可，数据权限和字段权限后续预留。</li>
+            <li>后台原则：只服务内容维护和线索处理，不扩展为泛业务系统。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>实施路径与里程碑</h2>
+      <div class="timeline">
+        <article class="phase">
+          <strong>M1 需求冻结</strong>
+          <span>第 1-2 周</span>
+          <p>完成项目范围、页面结构、功能边界、优先级和关键待确认项对齐。</p>
+        </article>
+        <article class="phase">
+          <strong>M2 方案冻结</strong>
+          <span>第 3-4 周</span>
+          <p>完成原型方向、技术方案、数据库与接口冻结版、权限与部署路径确认。</p>
+        </article>
+        <article class="phase">
+          <strong>M3 核心闭环完成</strong>
+          <span>第 5-6 周</span>
+          <p>完成核心前台页面、后台内容管理、询盘链路和基础运营能力。</p>
+        </article>
+        <article class="phase">
+          <strong>M4 正式上线交付</strong>
+          <span>第 7-8 周</span>
+          <p>完成联调、内容录入、业务演练式验收、上线发布与首轮巡检。</p>
+        </article>
+      </div>
+      <div class="note">
+        节奏判断：排期本身没有明显问题，最大的执行前提是内容准备不能滞后于开发节奏，尤其是首页主文案、产品字段内容、联系方式和案例公开边界。
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>当前成熟度与联合审核结果</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 28%;">维度</th>
+            <th style="width: 46%;">当前状态</th>
+            <th style="width: 26%;">判断</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="status-good">
+            <td>项目目标与范围</td>
+            <td>品牌官网、内容后台、询盘链路、招聘链路、SEO 与多语言边界已形成成套规划。</td>
+            <td>基本明确，可联合评审</td>
+          </tr>
+          <tr class="status-good">
+            <td>技术与实施方案</td>
+            <td>Spring Boot + Nuxt 3（官网）+ Vue（后台）+ MySQL + Redis + 文件存储的实现路线已明确，数据库与接口规划已成体系。</td>
+            <td>可进入方案冻结</td>
+          </tr>
+          <tr class="status-good">
+            <td>执行配套</td>
+            <td>开发拆解、内容准备、测试验收、部署上线、风险清单均已单独成文。</td>
+            <td>执行基础较完整</td>
+          </tr>
+          <tr class="status-good">
+            <td>文档一致性</td>
+            <td>经历两轮审核与两轮修复后，排期口径、权限边界、接口结构和导航体验已统一。</td>
+            <td>主要问题已收敛</td>
+          </tr>
+          <tr class="status-warn">
+            <td>管理决策闭环</td>
+            <td>英文范围、案例展示边界、SEO 路线已确认，当前主要待补首页数据口径和部分 P1 技术项。</td>
+            <td>基本闭环，可继续推进 M1</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>主要风险</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">风险</th>
+            <th style="width: 38%;">表现</th>
+            <th style="width: 18%;">管理影响</th>
+            <th style="width: 20%;">建议动作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="status-risk">
+            <td>内容与素材准备滞后</td>
+            <td>开发完成但首页、产品、案例、联系方式等内容未到位，站点无法形成可上线状态。</td>
+            <td>直接影响上线时间和最终质量</td>
+            <td>第 2 周起并行推进内容清单，指定页面责任人</td>
+          </tr>
+          <tr class="status-warn">
+            <td>范围膨胀</td>
+            <td>如果新增过多非核心后台能力，会挤压两个月节奏。</td>
+            <td>影响排期与交付稳定性</td>
+            <td>坚持 P0/P1 管理，新增需求进入下一阶段</td>
+          </tr>
+          <tr class="status-warn">
+            <td>全站双语内容准备量较大</td>
+            <td>既然首期确认全站双语，产品、方案、案例、新闻等内容都需要准备对应英文版本。</td>
+            <td>影响内容完备度与交付节奏</td>
+            <td>优先完成 P0 页面双语内容，再逐步补齐 P1 页面双语内容</td>
+          </tr>
+          <tr class="status-warn">
+            <td>首页数据口径未定</td>
+            <td>首页与关于页若继续使用模糊数字或占位信息，会影响对外可信度和内容定稿。</td>
+            <td>影响首页内容上线质量</td>
+            <td>在 M1 内补齐正式口径或暂不展示数值</td>
+          </tr>
+          <tr class="status-warn">
+            <td>上线后缺少运营责任人</td>
+            <td>新闻、案例、招聘等模块无人持续更新，官网价值快速衰减。</td>
+            <td>影响长期投入产出比</td>
+            <td>上线前确定运营 owner 和更新机制</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>待管理层拍板事项</h2>
+      <div class="decision-grid">
+        <article class="decision">
+          <h3>P0 决策 1：英文内容范围</h3>
+          <p>已确认：首期采用全站双语覆盖，前后台内容字段按全站双语方案组织。</p>
+        </article>
+        <article class="decision">
+          <h3>P0 决策 2：案例公开边界</h3>
+          <p>已确认：客户与产品只要在后台上传，即视为允许前台展示。</p>
+        </article>
+        <article class="decision">
+          <h3>P0 决策 3：首页核心数据口径</h3>
+          <p>设备数量、员工数量、专利数量等对外口径需统一，避免首页与关于页出现信息不一致。</p>
+        </article>
+        <article class="decision">
+          <h3>P0 决策 4：SEO 技术路线</h3>
+          <p>已确认：前台官网采用 Nuxt 3 SSR/混合渲染，后台管理采用 Vue SPA，中英文按独立 URL 路径区分。</p>
+        </article>
+        <article class="decision">
+          <h3>P1 决策 1：文件存储方案</h3>
+          <p>确定使用 MinIO、自建存储还是云对象存储，并同步确定访问域名与部署策略。</p>
+        </article>
+        <article class="decision">
+          <h3>P1 决策 2：招聘流程边界</h3>
+          <p>确认官网首期仅接收简历，还是需要邮件通知、自动筛选等扩展能力，避免招聘模块预期失真。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>建议决策</h2>
+      <div class="summary-board">
+        <article class="panel">
+          <h3>建议本次联合评审直接形成的结论</h3>
+          <ul>
+            <li>批准按 2 个月节奏推进，并以 <code>M1 / M2 / M3 / M4</code> 作为统一管理里程碑。</li>
+            <li>确认首期聚焦品牌展示、产品/方案表达、询盘链路和后台运营能力，不再扩项。</li>
+            <li>明确业务、品牌、销售、HR、运维五类责任人，并把内容清单纳入项目并行推进。</li>
+            <li>要求在进入第 3 周前完成 4 项 P0 决策闭环，否则不建议进入全面开发。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>建议联合评审后的下一步动作</h3>
+          <ul>
+            <li>第 1 步：完成管理层拍板和责任人指派，形成正式版本的范围冻结结论。</li>
+            <li>第 2 步：启动原型与技术方案冻结，并同步推进中英文文案、案例、图片和联系方式收集。</li>
+            <li>第 3 步：在第 5 周前保证核心页面、后台和询盘链路进入可联调状态。</li>
+            <li>第 4 步：上线前执行一次完整业务演练式验收，验证真实转化闭环。</li>
+          </ul>
+        </article>
+      </div>
+      <div class="note">
+        最终建议：项目可以进入联合评审，但不建议以“文档齐了”为理由直接跳过管理决策闭环。
+        当前最优路径是先完成 P0 决策和责任分配，再进入原型冻结和开发启动，这样两个月排期才有可执行性。
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>文档来源映射</h2>
+      <div class="source-grid">
+        <article class="source">
+          <h3>战略与范围</h3>
+          <ul>
+            <li><a href="./01_项目实施路线图.html">01 实施路线图</a></li>
+            <li><a href="./02_项目全景规划图.html">02 全景规划图</a></li>
+            <li><a href="./03_功能模块总图.html">03 功能模块总图</a></li>
+            <li><a href="./04_页面结构说明.html">04 页面结构说明</a></li>
+            <li><a href="./05_PRD功能清单.html">05 PRD 功能清单</a></li>
+          </ul>
+        </article>
+        <article class="source">
+          <h3>技术与实现</h3>
+          <ul>
+            <li><a href="./06_数据库表结构草案.html">06 数据库表结构草案</a></li>
+            <li><a href="./07_接口规划文档.html">07 接口规划文档</a></li>
+            <li><a href="./08_后台菜单与权限结构说明.html">08 后台菜单与权限</a></li>
+            <li><a href="./10_数据库ER关系图.html">10 数据库 ER 关系图</a></li>
+            <li><a href="./11_接口字段清单.html">11 接口字段清单</a></li>
+          </ul>
+        </article>
+        <article class="source">
+          <h3>执行与交付</h3>
+          <ul>
+            <li><a href="./09_开发任务拆解与里程碑.html">09 开发任务拆解</a></li>
+            <li><a href="./12_内容准备清单.html">12 内容准备清单</a></li>
+            <li><a href="./13_测试与验收清单.html">13 测试与验收清单</a></li>
+            <li><a href="./14_部署上线清单.html">14 部署上线清单</a></li>
+            <li><a href="./15_风险与待确认项清单.html">15 风险与待确认项</a></li>
+          </ul>
+        </article>
+        <article class="source">
+          <h3>审核与修复</h3>
+          <ul>
+            <li><a href="./16_文档审核报告.html">16 问题与修复跟踪</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

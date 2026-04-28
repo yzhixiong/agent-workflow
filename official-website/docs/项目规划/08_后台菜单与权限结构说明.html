@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网后台菜单与权限结构说明</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --soft: #edf7f0;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1280px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+    .nav a {
+      text-decoration: none; color: var(--primary); background: #fff; border: 1px solid var(--border);
+      border-radius: 999px; padding: 8px 14px; font-size: 14px;
+    }
+    .nav a.current { color: #fff; background: var(--primary); border-color: var(--primary); }
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff; border-radius: 26px; padding: 30px; box-shadow: var(--shadow); margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; max-width: 980px; line-height: 1.85; font-size: 15px; opacity: 0.95; }
+    .section {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      box-shadow: var(--shadow); padding: 22px; margin-bottom: 16px;
+    }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      border: 1px solid var(--border); padding: 12px 14px; text-align: left; vertical-align: top;
+      font-size: 14px; line-height: 1.75;
+    }
+    th { background: var(--soft); color: var(--primary); font-weight: 700; }
+    td { color: var(--muted); }
+    .note {
+      background: #edf7f0; border: 1px solid #d1e7d8; border-radius: 18px;
+      padding: 18px; color: var(--primary); line-height: 1.8; font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a class="current" href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网后台菜单与权限结构说明</h1>
+      <p>
+        后台结构建议遵循“内容运营优先、线索处理清晰、权限边界简洁”的原则。
+        左侧菜单不宜过深，首期优先服务内容编辑、销售跟进和招聘管理场景。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>后台菜单建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">一级菜单</th>
+            <th style="width: 28%;">二级菜单</th>
+            <th style="width: 30%;">主要功能</th>
+            <th style="width: 24%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>工作台</td>
+            <td>数据概览</td>
+            <td>查看询盘数量、简历数量、内容发布情况、快捷入口</td>
+            <td>可先简版</td>
+          </tr>
+          <tr>
+            <td>站点管理</td>
+            <td>站点配置、SEO 配置、Banner 管理</td>
+            <td>维护网站基础信息、首页轮播、SEO 信息</td>
+            <td>全局配置区</td>
+          </tr>
+          <tr>
+            <td>页面内容</td>
+            <td>首页、关于我们、工厂展示、联系我们</td>
+            <td>维护单页内容和模块化内容块</td>
+            <td>单页型内容</td>
+          </tr>
+          <tr>
+            <td>业务内容</td>
+            <td>产品分类、产品管理、解决方案、成功案例</td>
+            <td>维护业务展示核心内容</td>
+            <td>核心运营区</td>
+          </tr>
+          <tr>
+            <td>资讯内容</td>
+            <td>新闻分类、新闻管理、技术支持、视频中心</td>
+            <td>维护资讯、FAQ、技术文章和视频内容</td>
+            <td>SEO 运营区</td>
+          </tr>
+          <tr>
+            <td>线索中心</td>
+            <td>询盘管理、简历管理</td>
+            <td>查看提交记录、状态更新、备注跟进</td>
+            <td>销售与 HR 使用</td>
+          </tr>
+          <tr>
+            <td>招聘管理</td>
+            <td>岗位管理</td>
+            <td>发布岗位、上下架、维护岗位详情</td>
+            <td>可独立分组</td>
+          </tr>
+          <tr>
+            <td>资源中心</td>
+            <td>文件管理</td>
+            <td>图片、视频封面、PDF、简历附件统一管理</td>
+            <td>所有内容依赖</td>
+          </tr>
+          <tr>
+            <td>系统管理</td>
+            <td>账号管理、角色管理、菜单权限</td>
+            <td>后台用户、角色与授权配置</td>
+            <td>仅管理员可见</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>角色建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">角色</th>
+            <th style="width: 30%;">可访问范围</th>
+            <th style="width: 30%;">典型职责</th>
+            <th style="width: 20%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>超级管理员</td>
+            <td>全菜单、全接口</td>
+            <td>系统配置、账号管理、全站内容维护、权限分配</td>
+            <td>最高权限</td>
+          </tr>
+          <tr>
+            <td>内容编辑</td>
+            <td>页面内容、业务内容、资讯内容、资源中心</td>
+            <td>录入和维护官网内容、上传素材、发布新闻</td>
+            <td>不可管理账号权限</td>
+          </tr>
+          <tr>
+            <td>销售/客服</td>
+            <td>工作台、线索中心、联系我们相关配置只读</td>
+            <td>查看询盘、跟进备注、更新处理状态</td>
+            <td>内容权限可限制</td>
+          </tr>
+          <tr>
+            <td>HR</td>
+            <td>工作台、招聘管理、简历管理、资源中心</td>
+            <td>维护岗位、查看简历、更新候选人状态</td>
+            <td>与销售角色分离</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>权限粒度建议</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">权限类型</th>
+            <th style="width: 32%;">说明</th>
+            <th style="width: 20%;">示例</th>
+            <th style="width: 24%;">建议</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>首期实现：菜单权限</td>
+            <td>决定用户能否看到某个页面入口</td>
+            <td>是否显示“系统管理”</td>
+            <td>首期实现</td>
+          </tr>
+          <tr>
+            <td>首期实现：页面操作权限</td>
+            <td>决定能否新增、编辑、删除、发布、导出</td>
+            <td>新闻发布、询盘导出</td>
+            <td>首期实现</td>
+          </tr>
+          <tr>
+            <td>后续预留：数据权限</td>
+            <td>决定能否查看全部数据或部分数据</td>
+            <td>仅查看招聘数据</td>
+            <td>后续预留</td>
+          </tr>
+          <tr>
+            <td>后续预留：字段权限</td>
+            <td>决定敏感字段是否可见或可编辑</td>
+            <td>账号密码、附件下载</td>
+            <td>后续预留</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      首期权限设计建议“够用即可”，不要一开始做过细的数据权限模型。
+      对官网后台而言，先把菜单级和按钮级权限做好，已经足够支撑上线和运营。
+    </div>
+  </div>
+</body>
+</html>

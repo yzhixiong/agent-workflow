@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网功能模块总图</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6644;
+      --secondary: #2f8f57;
+      --soft: #eef7f1;
+      --line: #bcd5c5;
+      --border: #d6e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1280px, 92%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1f6a46, #2f8f57);
+      color: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 920px;
+      line-height: 1.85;
+      opacity: 0.95;
+      font-size: 15px;
+    }
+
+    .diagram {
+      display: grid;
+      grid-template-columns: 1fr 120px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .column {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .column h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .group {
+      background: #fafdfb;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    .group h3 {
+      margin: 0 0 10px;
+      color: var(--secondary);
+      font-size: 16px;
+    }
+
+    .group ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding-top: 62px;
+    }
+
+    .hub {
+      width: 120px;
+      min-height: 72px;
+      padding: 16px 12px;
+      border-radius: 18px;
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      color: var(--primary);
+      text-align: center;
+      font-weight: 700;
+      line-height: 1.6;
+      box-shadow: var(--shadow);
+    }
+
+    .line {
+      width: 4px;
+      height: 36px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, #9dc9ad, #cfe5d7);
+    }
+
+    .bottom {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .bottom-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .bottom-card h2 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 20px;
+    }
+
+    .bottom-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .flow {
+      margin-top: 18px;
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .flow h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 22px;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid #d5e7db;
+      border-radius: 16px;
+      padding: 14px;
+      min-height: 108px;
+    }
+
+    .flow-step strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .flow-step p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1080px) {
+      .diagram {
+        grid-template-columns: 1fr;
+      }
+
+      .center {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 0;
+      }
+
+      .line {
+        width: 36px;
+        height: 4px;
+        background: linear-gradient(to right, #9dc9ad, #cfe5d7);
+      }
+
+      .bottom,
+      .flow-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .bottom,
+      .flow-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a class="current" href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网功能模块总图</h1>
+      <p>
+        功能模块总图从“前台用户可见能力”和“后台管理能力”两个视角展开。
+        中间用站点公共能力串联，底部补充数据支撑与转化流程，确保这套官网不是单纯展示页，而是一套可维护、可运营、可沉淀线索的系统。
+      </p>
+    </section>
+
+    <section class="diagram">
+      <article class="column">
+        <h2>前台系统</h2>
+
+        <section class="group">
+          <h3>品牌展示模块</h3>
+          <ul>
+            <li>首页</li>
+            <li>关于我们</li>
+            <li>工厂展示</li>
+            <li>视频中心</li>
+          </ul>
+        </section>
+
+        <section class="group">
+          <h3>业务表达模块</h3>
+          <ul>
+            <li>产品中心</li>
+            <li>产品详情页</li>
+            <li>解决方案</li>
+            <li>技术支持</li>
+          </ul>
+        </section>
+
+        <section class="group">
+          <h3>信任建立模块</h3>
+          <ul>
+            <li>成功案例</li>
+            <li>品质与检测说明</li>
+            <li>资质与设备展示</li>
+            <li>新闻资讯</li>
+          </ul>
+        </section>
+
+        <section class="group">
+          <h3>转化入口模块</h3>
+          <ul>
+            <li>联系我们</li>
+            <li>在线询盘表单</li>
+            <li>解决方案页需求提交</li>
+            <li>招贤纳士与简历投递</li>
+          </ul>
+        </section>
+      </article>
+
+      <div class="center">
+        <div class="hub">站点公共能力</div>
+        <div class="line"></div>
+        <div class="hub">中英文切换</div>
+        <div class="line"></div>
+        <div class="hub">SEO 配置</div>
+        <div class="line"></div>
+        <div class="hub">文件存储</div>
+        <div class="line"></div>
+        <div class="hub">权限鉴权</div>
+      </div>
+
+      <article class="column">
+        <h2>后台系统</h2>
+
+        <section class="group">
+          <h3>系统管理模块</h3>
+          <ul>
+            <li>登录 / 退出</li>
+            <li>账号、角色、权限</li>
+            <li>菜单与站点配置</li>
+            <li>SEO 与基础信息配置</li>
+          </ul>
+        </section>
+
+        <section class="group">
+          <h3>内容管理模块</h3>
+          <ul>
+            <li>首页内容配置</li>
+            <li>关于我们管理</li>
+            <li>产品、方案、案例管理</li>
+            <li>新闻、技术、视频管理</li>
+          </ul>
+        </section>
+
+        <section class="group">
+          <h3>线索管理模块</h3>
+          <ul>
+            <li>询盘列表与状态管理</li>
+            <li>客户需求记录</li>
+            <li>跟进备注</li>
+            <li>导出与统计预留</li>
+          </ul>
+        </section>
+
+        <section class="group">
+          <h3>招聘管理模块</h3>
+          <ul>
+            <li>岗位发布与上下架</li>
+            <li>简历上传与查看</li>
+            <li>候选人状态维护</li>
+            <li>招聘内容维护</li>
+          </ul>
+        </section>
+      </article>
+    </section>
+
+    <section class="bottom">
+      <article class="bottom-card">
+        <h2>数据层</h2>
+        <ul>
+          <li>页面内容数据</li>
+          <li>产品 / 方案 / 案例数据</li>
+          <li>新闻、技术、视频数据</li>
+          <li>询盘与简历数据</li>
+        </ul>
+      </article>
+      <article class="bottom-card">
+        <h2>资源层</h2>
+        <ul>
+          <li>图片资源</li>
+          <li>视频封面与链接</li>
+          <li>PDF 与下载资料</li>
+          <li>多语言内容素材</li>
+        </ul>
+      </article>
+      <article class="bottom-card">
+          <h2>技术层</h2>
+          <ul>
+            <li>Spring Boot</li>
+            <li>Nuxt 3（前台官网）</li>
+            <li>Vue（后台管理）</li>
+            <li>MySQL + Redis</li>
+            <li>文件存储与 Nginx 部署</li>
+          </ul>
+      </article>
+    </section>
+
+    <section class="flow">
+      <h2>核心转化流程</h2>
+      <div class="flow-grid">
+        <article class="flow-step">
+          <strong>1. 访客进入</strong>
+          <p>通过搜索、品牌传播、直接访问进入首页、产品页或方案页。</p>
+        </article>
+        <article class="flow-step">
+          <strong>2. 获取信息</strong>
+          <p>查看企业介绍、工艺能力、工厂实力、案例和技术支持内容。</p>
+        </article>
+        <article class="flow-step">
+          <strong>3. 触发咨询</strong>
+          <p>在首页、产品页、解决方案页或联系我们页发起询盘或联系。</p>
+        </article>
+        <article class="flow-step">
+          <strong>4. 后台接收</strong>
+          <p>后台记录询盘信息、状态、附件和后续跟进备注。</p>
+        </article>
+        <article class="flow-step">
+          <strong>5. 转化沉淀</strong>
+          <p>销售与运营根据后台数据持续跟进，并迭代内容与页面策略。</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网项目规划文档索引</title>
+  <style>
+    :root {
+      --bg: #f4f8f5;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5d6d64;
+      --primary: #1f6a46;
+      --secondary: #2f8f57;
+      --border: #d6e4dc;
+      --shadow: 0 14px 32px rgba(22, 76, 49, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #e6f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+    }
+
+    .wrap {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      padding: 40px 0 72px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1f6a46, #2f8f57);
+      color: #fff;
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 860px;
+      line-height: 1.85;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .meta-item {
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .meta-item strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      margin: 28px 0 14px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 300px;
+    }
+
+    .card .num {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #eaf5ee;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .card ul {
+      margin: 0 0 18px;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      color: #fff;
+      border: 1px solid var(--primary);
+    }
+
+    .btn.secondary {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .note {
+      margin-top: 20px;
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px 20px;
+      color: var(--primary);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .meta,
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .meta,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>官网项目规划文档索引</h1>
+      <p>
+        本页作为项目规划阶段的统一入口，汇总官网项目当前完整文档集。
+        文档覆盖实施、规划、设计、数据、接口、测试、上线和审核等多个维度，可直接用于内部讨论、汇报展示和研发推进衔接。
+      </p>
+      <div class="meta">
+        <div class="meta-item">
+        <strong>23份文件</strong>
+        <span>含当前索引页</span>
+        </div>
+        <div class="meta-item">
+        <strong>22类文档</strong>
+        <span>路线、全景、模块、页面、PRD、数据库、接口、后台、开发、ER、字段、内容、测试、部署、风险、审核、修复、管理汇总、调研、启动、管控、测试报告</span>
+        </div>
+        <div class="meta-item">
+          <strong>2个月</strong>
+          <span>实施周期基线</span>
+        </div>
+        <div class="meta-item">
+          <strong>前后台一体</strong>
+          <span>统一规划范围</span>
+        </div>
+      </div>
+    </section>
+
+    <h2>汇总文档</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="num">20</div>
+        <h3>联合审核版汇总</h3>
+        <p>
+          用于把整套项目文档压缩成管理层可快速阅读的一份总报告，聚焦项目价值、范围、排期、成熟度、风险和待拍板事项。
+        </p>
+        <ul>
+          <li>适合联合评审和管理层汇报</li>
+          <li>压缩整套文档的核心结论</li>
+          <li>可直接作为推进决策入口页</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./20_联合审核版汇总.html">打开文档</a>
+        </div>
+      </article>
+    </section>
+
+    <h2>前置管理文档</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="num">21</div>
+        <h3>需求调研与现状分析</h3>
+        <p>
+          用于补齐项目在 PRD 之前的需求依据，集中说明项目背景、旧站问题、目标用户、核心痛点、需求来源与范围边界。
+        </p>
+        <ul>
+          <li>回答“为什么做、为什么这样做”</li>
+          <li>将规划结论回溯为正式调研依据</li>
+          <li>适合作为立项和需求评审输入</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./21_需求调研与现状分析.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">22</div>
+        <h3>项目启动书</h3>
+        <p>
+          用于把项目目标、范围、角色责任、里程碑、治理机制和启动前置条件固化为正式管理基线。
+        </p>
+        <ul>
+          <li>补齐项目章程与启动管理视角</li>
+          <li>明确责任分配和变更控制原则</li>
+          <li>适合启动会、联合评审和管理层拍板</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./22_项目启动书.html">打开文档</a>
+        </div>
+      </article>
+    </section>
+
+    <h2>启动后管控文档</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="num">23</div>
+        <h3>项目排期基线与进度管控</h3>
+        <p>
+          用于把相对周次转成绝对日期，建立项目启动后的排期基线、进度状态、首批闭环事项和更新机制。
+        </p>
+        <ul>
+          <li>适合单人项目持续跟踪</li>
+          <li>统一启动日期和交付日期口径</li>
+          <li>可实时更新进度和阻塞项</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./23_项目排期基线与进度管控.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">24</div>
+        <h3>模块测试计划与测试报告规范</h3>
+        <p>
+          用于定义每个模块的测试窗口、报告输出要求、报告模板字段和上线前回归规则。
+        </p>
+        <ul>
+          <li>按模块生成测试报告</li>
+          <li>适合单模块验收和缺陷闭环</li>
+          <li>可直接作为后续测试报告模板</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./24_模块测试计划与测试报告规范.html">打开文档</a>
+        </div>
+      </article>
+    </section>
+
+    <h2>规划文档</h2>
+    <section class="grid">
+      <article class="card">
+        <div class="num">01</div>
+        <h3>项目实施路线图</h3>
+        <p>
+          用于说明项目如何从需求确认推进到设计、开发、联调、上线，强调阶段划分与里程碑。
+        </p>
+        <ul>
+          <li>按 2 个月拆分 4 个阶段</li>
+          <li>明确每阶段核心任务与输出</li>
+          <li>包含关键里程碑与交付结果</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./01_项目实施路线图.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">02</div>
+        <h3>项目全景规划图</h3>
+        <p>
+          用于从更高层次梳理项目目标、用户、前后台范围、内容资产、技术架构与交付物。
+        </p>
+        <ul>
+          <li>覆盖品牌、内容、系统、转化、交付</li>
+          <li>适合管理层或项目汇报场景</li>
+          <li>帮助统一项目认知边界</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./02_项目全景规划图.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">03</div>
+        <h3>功能模块总图</h3>
+        <p>
+          用于梳理前台、后台、公共能力、数据层和转化流程，是后续 PRD 与开发拆分的重要基础。
+        </p>
+        <ul>
+          <li>区分前台可见能力与后台管理能力</li>
+          <li>突出中英文、SEO、文件、权限等公共能力</li>
+          <li>补充核心转化流程说明</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./03_功能模块总图.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">04</div>
+        <h3>页面结构说明</h3>
+        <p>
+          用于细化前台核心页面的目标、模块构成、内容重点与旧站内容映射，直接衔接页面原型与视觉设计。
+        </p>
+        <ul>
+          <li>逐页说明页面目标与模块清单</li>
+          <li>标注内容来源与需新增素材</li>
+          <li>区分优先级与转化职责</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./04_页面结构说明.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">05</div>
+        <h3>PRD功能清单</h3>
+        <p>
+          用于汇总前后台功能边界、字段方向、业务规则与实施优先级，是进入数据库设计和接口设计前的核心文档。
+        </p>
+        <ul>
+          <li>覆盖前台、后台、公共能力三层</li>
+          <li>强调转化、运营与可维护性</li>
+          <li>便于后续拆解开发任务</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./05_PRD功能清单.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">06</div>
+        <h3>数据库表结构草案</h3>
+        <p>
+          用于规划前后台核心数据对象、表拆分方向、关键字段和关系结构，支撑后端建模与接口设计。
+        </p>
+        <ul>
+          <li>覆盖内容、询盘、招聘、权限、文件等主表</li>
+          <li>强调多语言与 SEO 预留</li>
+          <li>可直接衔接建表实施</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./06_数据库表结构草案.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">07</div>
+        <h3>接口规划文档</h3>
+        <p>
+          用于定义前后台 API 的分层结构、资源范围、核心接口组和鉴权边界，支撑前后端并行开发。
+        </p>
+        <ul>
+          <li>区分前台公开接口与后台管理接口</li>
+          <li>覆盖询盘和招聘表单链路</li>
+          <li>便于后续补充字段和响应格式</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./07_接口规划文档.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">08</div>
+        <h3>后台菜单与权限结构说明</h3>
+        <p>
+          用于梳理后台导航、模块分组、角色边界和权限范围，帮助后台 UI 和权限开发同步推进。
+        </p>
+        <ul>
+          <li>明确后台左侧菜单结构</li>
+          <li>区分超级管理员与普通运营角色</li>
+          <li>便于实现 RBAC 权限控制</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./08_后台菜单与权限结构说明.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">09</div>
+        <h3>开发任务拆解与里程碑</h3>
+        <p>
+          用于把规划文档进一步转换为可执行任务，明确前后端分工、阶段输出、里程碑和依赖关系。
+        </p>
+        <ul>
+          <li>适合项目推进与排期管理</li>
+          <li>可直接用于研发任务分发</li>
+          <li>与两个月实施节奏对应</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./09_开发任务拆解与里程碑.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">10</div>
+        <h3>数据库ER关系图</h3>
+        <p>
+          用于从实体关系层面梳理系统主数据对象和关联逻辑，辅助后端建模、联表设计和数据理解。
+        </p>
+        <ul>
+          <li>聚焦内容、线索、权限、文件四大核心域</li>
+          <li>与表结构草案互相对应</li>
+          <li>适合研发评审和数据库审核</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./10_数据库ER关系图.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">11</div>
+        <h3>接口字段清单</h3>
+        <p>
+          用于细化高优先级接口的请求与响应字段，帮助前后端在联调前对齐数据结构与参数约束。
+        </p>
+        <ul>
+          <li>聚焦首页、产品、方案、询盘、简历等核心接口</li>
+          <li>兼顾前台与后台接口</li>
+          <li>适合直接进入接口实现</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./11_接口字段清单.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">12</div>
+        <h3>内容准备清单</h3>
+        <p>
+          用于明确业务侧、品牌侧、运营侧需要准备的文案、图片、案例、证书和视频素材，避免开发完成后缺内容。
+        </p>
+        <ul>
+          <li>按页面和素材类型拆分</li>
+          <li>区分必需项与增强项</li>
+          <li>适合并行推进内容筹备</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./12_内容准备清单.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">13</div>
+        <h3>测试与验收清单</h3>
+        <p>
+          用于定义功能测试、兼容性测试、SEO 检查、表单链路测试和上线前验收标准。
+        </p>
+        <ul>
+          <li>覆盖前台、后台、接口和内容</li>
+          <li>适合测试阶段逐项核对</li>
+          <li>可直接扩展为测试报告模板</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./13_测试与验收清单.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">14</div>
+        <h3>部署上线清单</h3>
+        <p>
+          用于规范环境准备、域名与 HTTPS、数据备份、发布步骤、回滚方案和上线后巡检。
+        </p>
+        <ul>
+          <li>适合运维和开发共同使用</li>
+          <li>覆盖发布前、中、后动作</li>
+          <li>降低上线遗漏风险</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./14_部署上线清单.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">15</div>
+        <h3>风险与待确认项清单</h3>
+        <p>
+          用于集中管理项目当前仍待业务、设计、研发或管理侧确认的问题，避免关键决策被遗漏。
+        </p>
+        <ul>
+          <li>区分问题来源与影响范围</li>
+          <li>便于项目例会持续跟进</li>
+          <li>适合作为项目风险台账</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./15_风险与待确认项清单.html">打开文档</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="num">16</div>
+        <h3>问题与修复跟踪</h3>
+        <p>
+          用于在同一页面中记录问题内容、发现时间、修复结果、修复时间和修复后效果，直接形成完整闭环台账。
+        </p>
+        <ul>
+          <li>问题与结果同屏查看</li>
+          <li>时间信息完整可追踪</li>
+          <li>适合直接做持续复审台账</li>
+        </ul>
+        <div class="actions">
+          <a class="btn primary" href="./16_文档审核报告.html">打开文档</a>
+        </div>
+      </article>
+    </section>
+
+    <div class="note">
+      当前目录已经形成从需求依据、项目启动、方案规划到进度管控和测试机制的较完整文档集。
+      后续如果继续扩展，更适合补充的是页面原型稿、视觉规范、真实测试报告和上线复盘文档。
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网项目排期基线与进度管控</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --soft: #edf7f0;
+      --soft-2: #f8fcf9;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1360px, 94%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 1040px;
+      line-height: 1.85;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .summary-item {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .summary-item span {
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: 0.95;
+    }
+
+    .section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: var(--soft-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel p,
+    .panel li,
+    .section p,
+    .section li {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    .panel ul,
+    .section ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    th {
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    .note {
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--primary);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .summary,
+      .grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .summary,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./22_项目启动书.html">项目启动书</a>
+      <a class="current" href="./23_项目排期基线与进度管控.html">项目排期基线与进度管控</a>
+      <a href="./24_模块测试计划与测试报告规范.html">模块测试计划与测试报告规范</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网项目排期基线与进度管控</h1>
+      <p>
+        本文档用于把项目从“按周描述”转换成“按具体日期执行”，作为项目启动后的统一排期基线和进度更新台账。
+        当前项目采用单人推进模式，因此排期设计遵循“先建立基础、再做核心、后做增强、最后按模块测试并出报告”的节奏。
+      </p>
+      <div class="summary">
+        <div class="summary-item">
+          <strong>启动日期</strong>
+          <span>2026-03-19</span>
+        </div>
+        <div class="summary-item">
+          <strong>计划交付</strong>
+          <span>2026-05-19</span>
+        </div>
+        <div class="summary-item">
+          <strong>统一责任人</strong>
+          <span>Ocean</span>
+        </div>
+        <div class="summary-item">
+          <strong>更新方式</strong>
+          <span>阶段切换和关键变化时实时更新。</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>基线信息</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">项</th>
+            <th style="width: 76%;">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>项目状态</td><td>已于 2026-03-19 立项并启动。</td></tr>
+          <tr><td>项目负责人</td><td>Ocean</td></tr>
+          <tr><td>排期口径</td><td>以本页绝对日期为准，其他文档中的“第 X 周”描述作为相对表达参考。</td></tr>
+          <tr><td>交付约束</td><td>两个月内完成首期交付，目标交付日期为 2026-05-19。</td></tr>
+          <tr><td>执行原则</td><td>先推进不依赖最终内容口径的基础工作，同时在 M1 阶段内闭环关键未决事项。</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>里程碑基线</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 12%;">里程碑</th>
+            <th style="width: 18%;">日期范围</th>
+            <th style="width: 28%;">目标</th>
+            <th style="width: 24%;">主要输出</th>
+            <th style="width: 10%;">责任人</th>
+            <th style="width: 8%;">状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>M1</td><td>2026-03-19 至 2026-03-31</td><td>完成项目启动、范围第一轮收敛、关键未决事项排期和文档基线建立</td><td>启动书定版、进度管控页、风险闭环计划</td><td>Ocean</td><td>进行中</td></tr>
+          <tr><td>M2</td><td>2026-04-01 至 2026-04-14</td><td>完成原型方向、技术路线、数据库与接口冻结版，搭建项目骨架</td><td>方案冻结结论、基础工程、后台骨架</td><td>Ocean</td><td>未开始</td></tr>
+          <tr><td>M3</td><td>2026-04-15 至 2026-04-30</td><td>完成核心页面、后台核心管理模块和询盘链路联调</td><td>核心模块可联调版本</td><td>Ocean</td><td>未开始</td></tr>
+          <tr><td>M4</td><td>2026-05-01 至 2026-05-19</td><td>完成增强模块、模块测试、测试报告、回归和上线交付</td><td>模块测试报告、上线版本、上线巡检记录</td><td>Ocean</td><td>未开始</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>阶段工作包</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">阶段</th>
+            <th style="width: 18%;">时间</th>
+            <th style="width: 36%;">重点工作</th>
+            <th style="width: 18%;">阶段输出</th>
+            <th style="width: 10%;">责任人</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>阶段一</td><td>2026-03-19 至 2026-03-31</td><td>启动项目、明确基线日期、收敛启动后优先闭环项、补齐管理类文档、建立测试报告规范</td><td>启动与管控体系搭好</td><td>Ocean</td></tr>
+          <tr><td>阶段二</td><td>2026-04-01 至 2026-04-14</td><td>冻结 SEO 路线、存储策略、接口方案，完成工程搭建和后台基础能力</td><td>工程骨架与方案冻结</td><td>Ocean</td></tr>
+          <tr><td>阶段三</td><td>2026-04-15 至 2026-04-30</td><td>推进首页、关于、产品、方案、联系、询盘、后台内容管理等核心模块开发与联调</td><td>核心模块联调可用</td><td>Ocean</td></tr>
+          <tr><td>阶段四</td><td>2026-05-01 至 2026-05-19</td><td>推进增强模块、模块测试、缺陷闭环、测试报告输出、部署和上线验收</td><td>上线交付版本</td><td>Ocean</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>启动后首批闭环事项</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">事项</th>
+            <th style="width: 28%;">处理策略</th>
+            <th style="width: 16%;">目标日期</th>
+            <th style="width: 10%;">责任人</th>
+            <th style="width: 12%;">当前状态</th>
+            <th style="width: 12%;">影响阶段</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>英文内容范围</td><td>首期已确定采用全站双语覆盖，后续按全站双语组织内容与字段</td><td>2026-03-19</td><td>Ocean</td><td>已确认</td><td>M1</td></tr>
+          <tr><td>首页核心数据口径</td><td>统一首页与关于页对外数字和表述</td><td>2026-03-25</td><td>Ocean</td><td>未开始</td><td>M1</td></tr>
+          <tr><td>案例公开边界</td><td>已确定客户与产品只要后台上传，即默认为允许展示</td><td>2026-03-19</td><td>Ocean</td><td>已确认</td><td>M1-M3</td></tr>
+          <tr><td>SEO 技术路线</td><td>已确定前台官网采用 Nuxt 3 SSR/混合渲染，后台管理采用 Vue SPA，并按独立语言 URL 组织</td><td>2026-03-19</td><td>Ocean</td><td>已确认</td><td>M1-M2</td></tr>
+          <tr><td>文件存储方案</td><td>结合部署方式确认首期文件管理策略</td><td>2026-04-03</td><td>Ocean</td><td>未开始</td><td>M2</td></tr>
+          <tr><td>招聘流程边界</td><td>确定首期是否仅做简历收集和后台查看</td><td>2026-04-08</td><td>Ocean</td><td>未开始</td><td>M2-M3</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>进度更新规则</h2>
+      <div class="grid-2">
+        <article class="panel">
+          <h3>建议更新时点</h3>
+          <ul>
+            <li>每完成一个关键事项或阶段输出时立即更新。</li>
+            <li>每周至少进行一次状态复盘，更新“进行中 / 已完成 / 阻塞”。</li>
+            <li>测试报告产出后同步回写到测试文档和本页里程碑状态。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>建议更新字段</h3>
+          <ul>
+            <li>当前阶段、完成度、阻塞项、下一步动作。</li>
+            <li>关键未决事项的最新结论和日期。</li>
+            <li>是否影响 2026-05-19 交付日期。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>当前首周动作</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">时间段</th>
+            <th style="width: 46%;">动作</th>
+            <th style="width: 18%;">输出</th>
+            <th style="width: 10%;">责任人</th>
+            <th style="width: 8%;">状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2026-03-19</td><td>确认项目正式启动、落地启动书、建立排期基线与测试机制</td><td>22 / 23 / 24 号文档</td><td>Ocean</td><td>进行中</td></tr>
+          <tr><td>2026-03-20 至 2026-03-24</td><td>落地全站双语策略，收敛首页核心数据口径并固化展示边界</td><td>风险与待确认项更新</td><td>Ocean</td><td>未开始</td></tr>
+          <tr><td>2026-03-25 至 2026-03-31</td><td>冻结 M1 结论，准备 M2 所需的技术方案与工程搭建输入</td><td>M1 阶段结论</td><td>Ocean</td><td>未开始</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      本页是启动后的进度控制主文档。后续如果阶段状态变化、目标日期调整或关键事项闭环，应优先更新本页，再同步更新风险清单、启动书和测试文档。
+    </div>
+  </div>
+</body>
+</html>

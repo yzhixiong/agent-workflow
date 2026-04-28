@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网项目启动书</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --secondary: #2f8f57;
+      --soft: #edf7f0;
+      --soft-2: #f8fcf9;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+      --warning: #fff7e8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1360px, 94%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 1040px;
+      line-height: 1.85;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .summary-item {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .summary-item span {
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: 0.95;
+    }
+
+    .section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .section h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .panel,
+    .mile {
+      background: var(--soft-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel p,
+    .panel li,
+    .mile p,
+    .section li {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    .panel ul,
+    .section ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .mile strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    th {
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    .note {
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--primary);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    .warn {
+      background: var(--warning);
+      border-color: #f0dfb7;
+      color: #7a5a11;
+    }
+
+    @media (max-width: 980px) {
+      .summary,
+      .grid-2,
+      .grid-4 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .summary,
+      .grid-2,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./20_联合审核版汇总.html">联合审核版汇总</a>
+      <a href="./21_需求调研与现状分析.html">需求调研与现状分析</a>
+      <a class="current" href="./22_项目启动书.html">项目启动书</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网项目启动书</h1>
+      <p>
+        本文档用于把需求依据、项目目标、交付范围、角色责任、实施节奏和治理机制固化为正式启动文件。
+        启动书的作用不是重复 PRD 或开发拆解，而是形成“项目为什么启动、由谁负责、按什么节奏推进、启动后优先闭环哪些事项”的统一管理基线。
+      </p>
+      <div class="summary">
+        <div class="summary-item">
+          <strong>项目周期</strong>
+          <span>自 2026-03-19 启动，计划于 2026-05-19 交付。</span>
+        </div>
+        <div class="summary-item">
+          <strong>首期目标</strong>
+          <span>可上线、可维护、可承接真实线索。</span>
+        </div>
+        <div class="summary-item">
+          <strong>交付原则</strong>
+          <span>先做品牌展示、内容后台和询盘闭环，不做泛业务扩项。</span>
+        </div>
+        <div class="summary-item">
+          <strong>启动状态</strong>
+          <span>已于 2026-03-19 确认立项并启动，按“边启动边收敛”方式推进。</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>项目基本信息</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">项</th>
+            <th style="width: 78%;">说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>项目名称</td>
+            <td>官网升级项目（Tritree Official Website）</td>
+          </tr>
+          <tr>
+            <td>项目定位</td>
+            <td>品牌官网与内容运营后台一体化建设项目。</td>
+          </tr>
+          <tr>
+            <td>项目状态</td>
+            <td>已确认立项并启动，当前处于启动后第 1 阶段。</td>
+          </tr>
+          <tr>
+            <td>项目负责人</td>
+            <td>Ocean</td>
+          </tr>
+          <tr>
+            <td>启动日期</td>
+            <td>2026-03-19</td>
+          </tr>
+          <tr>
+            <td>计划交付日期</td>
+            <td>2026-05-19</td>
+          </tr>
+          <tr>
+            <td>启动目标</td>
+            <td>完成官网重构、核心内容后台、询盘与招聘触点建设，并形成可持续维护的运营基础。</td>
+          </tr>
+          <tr>
+            <td>计划周期</td>
+            <td>2 个月，按 M1 范围收敛、M2 方案冻结、M3 核心模块联调、M4 全模块测试与上线交付推进。</td>
+          </tr>
+          <tr>
+            <td>交付模式</td>
+            <td>单人全流程负责，需求、设计协调、开发推进、测试验收、文档维护与上线管控统一由 Ocean 负责。</td>
+          </tr>
+          <tr>
+            <td>范围状态</td>
+            <td>主干范围已确定，细项将在 M1 期间持续收敛并同步更新文档。</td>
+          </tr>
+          <tr>
+            <td>项目产出</td>
+            <td>官网前台、后台管理、数据库与接口方案、内容准备清单、测试验收清单、部署上线清单及项目管理文档。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>启动背景与项目目标</h2>
+      <div class="grid-2">
+        <article class="panel">
+          <h3>启动背景</h3>
+          <ul>
+            <li>现官网在品牌专业度、能力表达、案例呈现和转化承接方面存在明显提升空间。</li>
+            <li>内容资产缺少结构化沉淀，后台维护能力不足，影响长期运营。</li>
+            <li>项目已形成较完整的规划、接口、数据、测试和部署资料，但缺少正式启动与调研基线。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>项目目标</h3>
+          <ul>
+            <li>统一品牌形象，突出制造能力与行业理解。</li>
+            <li>以首页、产品页、方案页和联系页承担真实转化职责。</li>
+            <li>建设内容后台，让上线后更新不依赖开发。</li>
+            <li>为多语言扩展、SEO 运营和持续内容建设打基础。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>项目范围</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">类别</th>
+            <th style="width: 40%;">范围说明</th>
+            <th style="width: 22%;">优先级</th>
+            <th style="width: 20%;">备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>前台官网</td>
+            <td>首页、关于我们、产品中心、解决方案、联系我们，以及案例、工厂、新闻、技术支持、招聘等增强页面。</td>
+            <td>P0 / P1</td>
+            <td>P0 页面优先保证上线。</td>
+          </tr>
+          <tr>
+            <td>核心链路</td>
+            <td>询盘提交、后台查看与状态更新；岗位展示、简历投递与后台查看。</td>
+            <td>P0 / P1</td>
+            <td>询盘为 P0，招聘为 P1。</td>
+          </tr>
+          <tr>
+            <td>后台管理</td>
+            <td>登录鉴权、菜单权限、站点配置、首页配置、产品/方案/案例/新闻等内容管理、文件中心、线索管理。</td>
+            <td>P0 / P1</td>
+            <td>后台只服务内容和线索，不做泛业务扩展。</td>
+          </tr>
+          <tr>
+            <td>公共能力</td>
+            <td>中英文字段结构、基础 SEO、响应式、统一文件管理、部署上线和验收机制。</td>
+            <td>P0</td>
+            <td>属于首期基线能力。</td>
+          </tr>
+          <tr>
+            <td>范围外</td>
+            <td>复杂 CRM/ERP 流程、字段级数据权限、自动化招聘筛选、大规模视频内容体系。</td>
+            <td>不纳入首期</td>
+            <td>如需建设，应单独纳入后续阶段。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>项目角色与责任</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">角色</th>
+            <th style="width: 22%;">责任人</th>
+            <th style="width: 28%;">主要职责</th>
+            <th style="width: 32%;">当前状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>项目负责人 / PM</td>
+            <td>Ocean</td>
+            <td>维护范围、排期、风险、例会结论和项目整体推进节奏。</td>
+            <td>已确定。</td>
+          </tr>
+          <tr>
+            <td>需求 / 内容 owner</td>
+            <td>Ocean</td>
+            <td>收敛 PRD、页面结构、内容准备、案例边界和待确认事项。</td>
+            <td>已确定，按文档持续更新。</td>
+          </tr>
+          <tr>
+            <td>研发 owner</td>
+            <td>Ocean</td>
+            <td>负责前台、后台、接口、部署方案和技术决策推进。</td>
+            <td>已确定。</td>
+          </tr>
+          <tr>
+            <td>测试 / 验收 owner</td>
+            <td>Ocean</td>
+            <td>按模块编写测试清单、执行测试、输出测试报告并推动缺陷闭环。</td>
+            <td>已确定，采用模块级测试报告机制。</td>
+          </tr>
+          <tr>
+            <td>文档 / 进度管控 owner</td>
+            <td>Ocean</td>
+            <td>实时更新启动书、风险清单、排期基线、测试报告和阶段状态。</td>
+            <td>已确定。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>实施节奏与里程碑</h2>
+      <div class="grid-4">
+        <article class="mile">
+          <strong>M1 范围与需求收敛</strong>
+          <p>2026-03-19 至 2026-03-31，完成启动、基线排期、关键问题第一轮收敛和文档更新机制建立。</p>
+        </article>
+        <article class="mile">
+          <strong>M2 方案冻结</strong>
+          <p>2026-04-01 至 2026-04-14，完成原型方向、技术方案、数据库与接口冻结版、部署路径确认。</p>
+        </article>
+        <article class="mile">
+          <strong>M3 核心模块联调完成</strong>
+          <p>2026-04-15 至 2026-04-30，完成核心前台页面、后台内容管理和询盘链路联调。</p>
+        </article>
+        <article class="mile">
+          <strong>M4 测试、报告与上线交付</strong>
+          <p>2026-05-01 至 2026-05-19，完成模块测试、测试报告、回归、上线发布和首轮巡检。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>治理机制与工作规则</h2>
+      <div class="grid-2">
+        <article class="panel">
+          <h3>沟通与评审机制</h3>
+          <ul>
+            <li>采用单人推进模式，Ocean 负责统一记录阶段结论、风险和下一步动作。</li>
+            <li>至少在每个阶段切换点更新一次文档；出现范围、风险或测试结论变化时即时更新。</li>
+            <li>M1、M2、M3、M4 均保留里程碑检查点，作为是否进入下一阶段的控制门。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>变更控制原则</h3>
+          <ul>
+            <li>P0 范围冻结后，新增需求原则上进入 P1/P2 或二期，不挤占核心排期。</li>
+            <li>涉及架构、SEO 路线、多语言范围的变更，必须走专项评审。</li>
+            <li>内容、素材、测试报告和上线准备的闭环责任当前统一由 Ocean 承担。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>启动后首批闭环事项</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">事项</th>
+            <th style="width: 28%;">影响</th>
+            <th style="width: 12%;">优先级</th>
+            <th style="width: 12%;">责任人</th>
+            <th style="width: 24%;">闭环要求</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>英文内容范围</td>
+            <td>影响字段结构、翻译工作量和首期范围。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>已于 2026-03-19 确认为全站双语覆盖。</td>
+          </tr>
+          <tr>
+            <td>案例公开边界</td>
+            <td>影响案例页、方案页和首页内容完整度。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>已于 2026-03-19 确认为后台上传即视为可展示。</td>
+          </tr>
+          <tr>
+            <td>首页核心数据口径</td>
+            <td>影响对外信息一致性和品牌可信度。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>2026-03-25 前完成首页和关于页统一口径。</td>
+          </tr>
+          <tr>
+            <td>SEO 技术路线</td>
+            <td>影响前端技术实现和返工成本。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>已于 2026-03-19 确认：前台 Nuxt 3 SSR/混合渲染，后台 Vue SPA。</td>
+          </tr>
+          <tr>
+            <td>文件存储方案</td>
+            <td>影响后台上传、资源访问和部署方式。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>2026-04-03 前明确首期存储方案。</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note warn">
+        项目已于 2026-03-19 启动，因此这些事项不再定义为“启动前阻塞项”，而是定义为“启动后两周内优先闭环项”。
+        在这些事项未闭环前，可以先推进不依赖最终口径的基础搭建、后台骨架、文档基线和测试机制建设。
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>启动结论</h2>
+      <div class="note">
+        启动结论：官网项目已于 2026-03-19 正式立项并启动，由 Ocean 单人全流程负责。
+        当前执行策略不是等待所有细节完全明确后再开始，而是在两个月交付约束下先建立排期基线、进度管控和测试机制，
+        同时在 M1 阶段内持续收敛关键未决事项。
+      </div>
+    </section>
+  </div>
+</body>
+</html>

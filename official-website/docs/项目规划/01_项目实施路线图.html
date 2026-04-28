@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网项目实施路线图</title>
+  <style>
+    :root {
+      --bg: #f4f7f4;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5f6f66;
+      --primary: #1f6f43;
+      --primary-soft: #e6f3ea;
+      --accent: #2f8f57;
+      --border: #d9e5dc;
+      --shadow: 0 12px 30px rgba(20, 73, 44, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #e3f1e8 0, transparent 32%),
+        radial-gradient(circle at bottom right, #edf6ef 0, transparent 28%),
+        var(--bg);
+    }
+
+    .wrap {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244, 247, 244, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1d6b41, #2f8f57);
+      color: #fff;
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 860px;
+      line-height: 1.85;
+      opacity: 0.95;
+      font-size: 15px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .summary-item {
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      margin: 34px 0 16px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      bottom: 10px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, #1f6f43, #99c4aa);
+    }
+
+    .phase {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .phase::before {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: 24px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 4px solid #dff1e6;
+    }
+
+    .phase-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .phase-title {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .tag {
+      border-radius: 999px;
+      background: var(--primary-soft);
+      border: 1px solid #cfe2d4;
+      color: var(--primary);
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: #fafdfb;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: var(--primary);
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .milestones {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .mile {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .mile strong {
+      display: block;
+      color: var(--primary);
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .mile p {
+      margin: 0;
+      line-height: 1.75;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .note {
+      margin-top: 18px;
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      color: var(--primary);
+      border-radius: 16px;
+      padding: 16px 18px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .summary,
+      .milestones,
+      .phase-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .summary,
+      .milestones,
+      .phase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .wrap {
+        padding-top: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a class="current" href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网项目实施路线图</h1>
+      <p>
+        本项目按 2 个月实施，围绕“品牌官网前台 + 内容管理后台 + 询盘与招聘转化”推进。
+        核心目标不是快速拼装页面，而是完成一套可长期运营、可持续扩展、对海内外客户可用的企业官网系统。
+      </p>
+      <div class="summary">
+        <div class="summary-item">
+          <strong>2个月</strong>
+          <span>项目总周期</span>
+        </div>
+        <div class="summary-item">
+          <strong>4阶段</strong>
+          <span>实施分段推进</span>
+        </div>
+        <div class="summary-item">
+          <strong>前后台</strong>
+          <span>同步建设与联调</span>
+        </div>
+        <div class="summary-item">
+          <strong>可运营</strong>
+          <span>作为最终交付目标</span>
+        </div>
+      </div>
+    </section>
+
+    <h2>实施阶段</h2>
+    <section class="timeline">
+      <article class="phase">
+        <div class="phase-head">
+          <div class="phase-title">阶段一：项目规划与需求确认</div>
+          <div class="tag">第1-2周</div>
+        </div>
+        <div class="phase-grid">
+          <div class="panel">
+            <h3>核心任务</h3>
+            <ul>
+              <li>梳理现官网内容资产与可复用素材</li>
+              <li>确认品牌定位、目标用户、转化动作</li>
+              <li>明确本期范围与中英文策略</li>
+              <li>冻结信息架构与栏目边界</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>关键输出</h3>
+            <ul>
+              <li>项目实施路线图</li>
+              <li>项目全景规划图</li>
+              <li>功能模块总图</li>
+              <li>Sitemap、页面清单、数据库与接口草案</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>阶段结果</h3>
+            <ul>
+              <li>需求边界清晰</li>
+              <li>项目范围可控</li>
+              <li>内容迁移方向明确</li>
+              <li>进入原型与技术方案设计</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="phase">
+        <div class="phase-head">
+          <div class="phase-title">阶段二：原型设计与技术方案制定</div>
+          <div class="tag">第3-4周</div>
+        </div>
+        <div class="phase-grid">
+          <div class="panel">
+            <h3>核心任务</h3>
+            <ul>
+              <li>完成前台主要页面原型设计</li>
+              <li>设计后台内容管理结构</li>
+              <li>完成数据库与接口冻结版规划</li>
+              <li>明确部署架构与权限体系</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>技术范围</h3>
+            <ul>
+              <li>Spring Boot 后端基础架构</li>
+              <li>Nuxt 3 前台官网与 Vue 后台工程划分</li>
+              <li>MySQL、Redis、文件存储设计</li>
+              <li>SEO、表单、上传方案落定</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>阶段结果</h3>
+            <ul>
+              <li>原型与视觉方向确定</li>
+              <li>技术方案可落地</li>
+              <li>数据结构清晰</li>
+              <li>开发可以并行推进</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="phase">
+        <div class="phase-head">
+          <div class="phase-title">阶段三：系统开发与核心功能建设</div>
+          <div class="tag">第5-6周</div>
+        </div>
+        <div class="phase-grid">
+          <div class="panel">
+            <h3>前台开发</h3>
+            <ul>
+              <li>首页、关于我们、产品中心</li>
+              <li>解决方案、工厂展示、案例</li>
+              <li>新闻资讯、技术支持、视频中心</li>
+              <li>联系我们、招贤纳士</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>后台开发</h3>
+            <ul>
+              <li>登录、权限、菜单管理</li>
+              <li>CMS 内容管理模块</li>
+              <li>产品、方案、案例、新闻管理</li>
+              <li>询盘管理、招聘岗位、简历管理</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>配套能力</h3>
+            <ul>
+              <li>文件上传与媒体资源管理</li>
+              <li>站点配置与 SEO 配置</li>
+              <li>中英文内容支持</li>
+              <li>表单转化链路打通</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="phase">
+        <div class="phase-head">
+          <div class="phase-title">阶段四：联调测试、内容上线与交付</div>
+          <div class="tag">第7-8周</div>
+        </div>
+        <div class="phase-grid">
+          <div class="panel">
+            <h3>联调测试</h3>
+            <ul>
+              <li>前后台接口联调</li>
+              <li>PC 与移动端兼容测试</li>
+              <li>权限、上传、表单、SEO 测试</li>
+              <li>问题修复与体验优化</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>上线准备</h3>
+            <ul>
+              <li>录入企业介绍、产品、案例、新闻</li>
+              <li>补齐图片、视频、证书等素材</li>
+              <li>部署生产环境与域名配置</li>
+              <li>完成验收与发布检查</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>阶段结果</h3>
+            <ul>
+              <li>官网前台正式上线</li>
+              <li>后台具备独立运营能力</li>
+              <li>询盘和招聘链路可用</li>
+              <li>具备后续迭代基础</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <h2>关键里程碑</h2>
+    <section class="milestones">
+      <article class="mile">
+        <strong>M1 需求冻结</strong>
+        <p>完成页面范围、功能边界、内容结构和项目优先级确认。</p>
+      </article>
+      <article class="mile">
+        <strong>M2 方案冻结</strong>
+        <p>完成原型、视觉方向、数据库设计、接口与部署方案。</p>
+      </article>
+      <article class="mile">
+        <strong>M3 核心业务闭环完成</strong>
+        <p>前后台核心开发完成，形成内容管理、询盘收集与招聘投递的业务闭环，并具备联调、测试和内容录入条件。</p>
+      </article>
+      <article class="mile">
+        <strong>M4 正式上线交付</strong>
+        <p>站点正式上线运行，后台可持续维护内容，并稳定支持客户联系转化与简历接收。</p>
+      </article>
+    </section>
+
+    <div class="note">
+      建议将项目目标定义为“2个月内完成一版可长期运营的品牌官网系统”。
+      这样可以把旧官网中的技术资产沉淀下来，同时补齐现代制造业官网所需要的结构化内容、信任表达和转化能力。
+    </div>
+  </div>
+</body>
+</html>

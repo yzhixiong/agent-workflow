@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网需求调研与现状分析</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --secondary: #2f8f57;
+      --soft: #edf7f0;
+      --soft-2: #f8fcf9;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1360px, 94%);
+      margin: 0 auto;
+      padding: 36px 0 72px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 1040px;
+      line-height: 1.85;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .summary-item {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .summary-item span {
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: 0.95;
+    }
+
+    .section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .section h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .panel {
+      background: var(--soft-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .panel p,
+    .panel li,
+    .section li,
+    .section p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    .panel ul,
+    .section ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    th {
+      background: var(--soft);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    .note {
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--primary);
+      line-height: 1.85;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .summary,
+      .two-col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .summary,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./20_联合审核版汇总.html">联合审核版汇总</a>
+      <a class="current" href="./21_需求调研与现状分析.html">需求调研与现状分析</a>
+      <a href="./22_项目启动书.html">项目启动书</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网需求调研与现状分析</h1>
+      <p>
+        本文档用于补齐项目在进入 PRD、接口规划和开发拆解之前的需求依据。
+        它将已有规划文档中的项目背景、旧站问题、目标用户、核心痛点、需求来源、范围边界和待决策事项重新整理为正式的调研沉淀，
+        作为“为什么做、为什么这样做、为什么分 P0/P1”的统一依据。
+      </p>
+      <div class="summary">
+        <div class="summary-item">
+          <strong>定位明确</strong>
+          <span>不是单纯改版页面，而是建设可运营、可承接线索的品牌官网系统。</span>
+        </div>
+        <div class="summary-item">
+          <strong>调研对象 4 类</strong>
+          <span>外部客户、内部业务/销售、HR、后台内容维护人员。</span>
+        </div>
+        <div class="summary-item">
+          <strong>核心问题 5 项</strong>
+          <span>品牌表达、内容结构、转化链路、运营维护和多语言/SEO 基础不足。</span>
+        </div>
+        <div class="summary-item">
+          <strong>重要说明</strong>
+          <span>本版基于现有规划文档提炼，如后续有访谈纪要，应作为附件并入。</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>调研范围与来源</h2>
+      <div class="two-col">
+        <article class="panel">
+          <h3>本次调研覆盖范围</h3>
+          <ul>
+            <li>现官网信息架构、内容资产和可复用素材。</li>
+            <li>品牌展示、产品与方案表达、案例呈现、联系转化、招聘触点。</li>
+            <li>后台内容维护、线索管理、文件管理和权限管理诉求。</li>
+            <li>中英文展示、SEO 基础能力、上线后持续运营能力。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>本版需求依据来源</h3>
+          <ul>
+            <li>项目全景规划、实施路线、页面结构、PRD、风险清单和内容准备清单。</li>
+            <li>旧站内容迁移与页面重构判断。</li>
+            <li>询盘、简历、内容维护等核心业务链路设计。</li>
+            <li>联合审核版汇总中的目标、范围、风险和管理决策项。</li>
+          </ul>
+        </article>
+      </div>
+      <div class="note">
+        当前文档能支撑项目立项、范围冻结和开发前评审，但如果后续补充了业务访谈、客户反馈或竞品分析，应继续纳入本页或附录，
+        让需求来源保持可追溯。
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>业务背景与建设目标</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">项</th>
+            <th style="width: 78%;">调研结论</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>项目背景</td>
+            <td>官网需要从“信息堆叠型企业网站”升级为“可信的品牌与制造能力展示窗口”，同时补齐询盘承接、招聘触点和后台维护能力。</td>
+          </tr>
+          <tr>
+            <td>建设目标</td>
+            <td>在两个月周期内形成一版可上线、可维护、可承接真实客户线索的官网系统，并为后续多语言扩展与持续运营打基础。</td>
+          </tr>
+          <tr>
+            <td>业务价值</td>
+            <td>统一品牌形象，重构产品与方案表达，提升信任感和转化效率，把内容、案例、新闻和招聘沉淀为结构化资产。</td>
+          </tr>
+          <tr>
+            <td>交付定位</td>
+            <td>首期交付重点是品牌展示、产品/方案表达、询盘链路和内容后台，不做泛业务系统扩张。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>现状问题诊断</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 20%;">问题类别</th>
+            <th style="width: 34%;">现状表现</th>
+            <th style="width: 22%;">业务影响</th>
+            <th style="width: 24%;">调研判断</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>品牌表达弱</td>
+            <td>首页和核心页面缺少一句话定位、核心优势和强 CTA，企业形象更像资料陈列。</td>
+            <td>影响客户第一印象与信任建立。</td>
+            <td>首页、关于、方案页需要重构为“品牌 + 能力 + 转化”结构。</td>
+          </tr>
+          <tr>
+            <td>内容结构松散</td>
+            <td>产品、工艺、解决方案、案例之间关联关系弱，旧站内容冗长且不易被快速理解。</td>
+            <td>影响客户理解制造能力和行业适配度。</td>
+            <td>不适合机械迁移，需重构为结构化内容资产。</td>
+          </tr>
+          <tr>
+            <td>转化链路不完整</td>
+            <td>询盘入口、表单承接、后台跟进、状态维护没有形成可追踪闭环。</td>
+            <td>官网无法稳定承担销售线索入口角色。</td>
+            <td>询盘链路应纳入 P0 范围并贯通前后台。</td>
+          </tr>
+          <tr>
+            <td>运营维护能力不足</td>
+            <td>内容更新、案例维护、招聘发布、文件管理可能依赖研发或临时处理。</td>
+            <td>上线后维护成本高，长期价值衰减快。</td>
+            <td>必须建设后台内容管理与统一文件中心。</td>
+          </tr>
+          <tr>
+            <td>多语言与 SEO 基础薄弱</td>
+            <td>全站双语方向已经明确，前端技术路线也已明确，后续重点转向工程落地与内容准备。</td>
+            <td>影响国际客户访问与搜索表现。</td>
+            <td>当前重点已从“是否采用 SEO 路线”转为“如何按既定路线实现全站双语与动态内容渲染”。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>目标用户与核心场景</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">用户角色</th>
+            <th style="width: 28%;">关注点</th>
+            <th style="width: 28%;">典型场景</th>
+            <th style="width: 26%;">对应需求</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>潜在客户 / 采购</td>
+            <td>公司是否可信、能做什么、有没有相关案例、如何快速联系。</td>
+            <td>浏览首页、产品、方案、案例后发起询盘。</td>
+            <td>品牌展示、产品与方案内容、案例、公信力、询盘表单。</td>
+          </tr>
+          <tr>
+            <td>工程 / 技术决策者</td>
+            <td>工艺能力、材质与性能、品质保障、行业经验。</td>
+            <td>查看产品详情、技术支持、工厂与品质内容。</td>
+            <td>结构化产品字段、技术支持、工厂展示、资质说明。</td>
+          </tr>
+          <tr>
+            <td>求职者</td>
+            <td>岗位信息是否清楚、投递是否方便。</td>
+            <td>浏览岗位详情并提交简历。</td>
+            <td>岗位列表、详情页、简历投递和后台查看。</td>
+          </tr>
+          <tr>
+            <td>运营 / 内容维护人员</td>
+            <td>是否能独立更新内容，是否便于维护素材与线索。</td>
+            <td>后台发布内容、管理图片和处理询盘。</td>
+            <td>后台权限、内容管理、文件中心、线索管理。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>核心需求结论</h2>
+      <div class="two-col">
+        <article class="panel">
+          <h3>P0 必须落地需求</h3>
+          <ul>
+            <li>首页、关于我们、产品中心、解决方案、联系我们。</li>
+            <li>在线询盘提交、后台查看与状态更新。</li>
+            <li>后台登录鉴权、菜单权限、站点配置、首页配置、产品与方案管理。</li>
+            <li>中英文内容字段结构、响应式、基础 SEO、统一文件中心。</li>
+            <li>测试验收、部署上线和上线后巡检准备。</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>P1 / P2 增强需求</h3>
+          <ul>
+            <li>P1：成功案例、工厂展示、新闻资讯、技术支持、招聘管理、简历管理。</li>
+            <li>P2：视频中心及更丰富的媒体内容。</li>
+            <li>招聘自动筛选、复杂数据权限、泛业务流程不纳入首期。</li>
+            <li>后台原则是服务内容与线索管理，不做 ERP/CRM 化扩张。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>范围边界与非需求项</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 28%;">范围外事项</th>
+            <th style="width: 36%;">不纳入首期原因</th>
+            <th style="width: 36%;">建议处理方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>复杂销售业务系统</td>
+            <td>官网项目重点是展示、内容和线索承接，不适合扩展为 CRM 或订单系统。</td>
+            <td>如后续有需要，作为独立二期项目立项。</td>
+          </tr>
+          <tr>
+            <td>精细化字段权限和数据权限</td>
+            <td>首期只需满足菜单级和页面操作级权限，过早复杂化会拉长周期。</td>
+            <td>在 RBAC 基础上预留扩展位。</td>
+          </tr>
+          <tr>
+            <td>大量视频化内容建设</td>
+            <td>素材准备成本高，且对首期上线不是阻断项。</td>
+            <td>先保留入口和结构，二期补素材。</td>
+          </tr>
+          <tr>
+            <td>全量自动化招聘流程</td>
+            <td>当前明确需求主要是岗位展示和简历投递，自动筛选等能力边界不清。</td>
+            <td>先做基础投递闭环，后续按 HR 需求扩展。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>当前关键决策状态</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 24%;">事项</th>
+            <th style="width: 34%;">影响</th>
+            <th style="width: 14%;">优先级</th>
+            <th style="width: 14%;">责任人</th>
+            <th style="width: 14%;">状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>英文内容范围</td>
+            <td>影响翻译工作量、字段设计和首期交付边界。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>已确认：全站双语</td>
+          </tr>
+          <tr>
+            <td>案例公开边界</td>
+            <td>影响案例页、方案页和首页可信度内容是否能完整落地。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>已确认：后台上传即展示</td>
+          </tr>
+          <tr>
+            <td>首页核心数据口径</td>
+            <td>影响首页与关于页对外信息一致性。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>待确认</td>
+          </tr>
+          <tr>
+            <td>SEO 技术路线</td>
+            <td>影响前端渲染方案、开发路径和搜索效果。</td>
+            <td>P0</td>
+            <td>Ocean</td>
+            <td>已确认：Nuxt 3 SSR/混合渲染</td>
+          </tr>
+          <tr>
+            <td>文件存储方案</td>
+            <td>影响后台上传、访问域名和部署策略。</td>
+            <td>P1</td>
+            <td>Ocean</td>
+            <td>待确认</td>
+          </tr>
+          <tr>
+            <td>招聘流程边界</td>
+            <td>影响岗位与简历模块是否需要扩展通知和自动筛选能力。</td>
+            <td>P1</td>
+            <td>Ocean</td>
+            <td>待确认</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      调研结论很清楚：这个项目的主要难点不是技术实现，而是范围控制、内容准备、公开边界和运营机制。
+      因此需求文档的重点不应只是罗列功能，而应把这些前置约束明确为正式项目依据。
+    </div>
+  </div>
+</body>
+</html>

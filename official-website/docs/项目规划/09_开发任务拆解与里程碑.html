@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>官网开发任务拆解与里程碑</title>
+  <style>
+    :root {
+      --bg: #f5f8f6;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6c63;
+      --primary: #1f6745;
+      --soft: #edf7f0;
+      --border: #d7e4dc;
+      --shadow: 0 12px 28px rgba(21, 73, 46, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, #e5f3ea 0, transparent 34%),
+        radial-gradient(circle at bottom right, #edf7f0 0, transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+    .wrap { width: min(1360px, 94%); margin: 0 auto; padding: 36px 0 72px; }
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 248, 246, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 10px 0 6px;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--primary);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+    }
+    .nav a.current {
+      color: #fff;
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .hero {
+      background: linear-gradient(135deg, #1f6b46, #2f8f57);
+      color: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 34px; line-height: 1.2; }
+    .hero p { margin: 0; max-width: 1020px; line-height: 1.85; font-size: 15px; opacity: 0.95; }
+    .section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-bottom: 16px;
+    }
+    .section h2 { margin: 0 0 14px; color: var(--primary); font-size: 24px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    th { background: var(--soft); color: var(--primary); font-weight: 700; }
+    td { color: var(--muted); }
+    .note {
+      background: #edf7f0;
+      border: 1px solid #d1e7d8;
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--primary);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="./00_索引.html">索引</a>
+      <a href="./01_项目实施路线图.html">项目实施路线图</a>
+      <a href="./02_项目全景规划图.html">项目全景规划图</a>
+      <a href="./03_功能模块总图.html">功能模块总图</a>
+      <a href="./04_页面结构说明.html">页面结构说明</a>
+      <a href="./05_PRD功能清单.html">PRD功能清单</a>
+      <a href="./06_数据库表结构草案.html">数据库表结构草案</a>
+      <a href="./07_接口规划文档.html">接口规划文档</a>
+      <a href="./08_后台菜单与权限结构说明.html">后台菜单与权限结构说明</a>
+      <a class="current" href="./09_开发任务拆解与里程碑.html">开发任务拆解与里程碑</a>
+      <a href="./10_数据库ER关系图.html">数据库ER关系图</a>
+      <a href="./11_接口字段清单.html">接口字段清单</a>
+      <a href="./12_内容准备清单.html">内容准备清单</a>
+      <a href="./13_测试与验收清单.html">测试与验收清单</a>
+      <a href="./14_部署上线清单.html">部署上线清单</a>
+      <a href="./15_风险与待确认项清单.html">风险与待确认项清单</a>
+      <a href="./16_文档审核报告.html">问题与修复跟踪</a>
+    </nav>
+
+    <section class="hero">
+      <h1>官网开发任务拆解与里程碑</h1>
+      <p>
+        本文档将规划阶段的内容进一步拆成可执行任务，适用于研发排期、资源协调和阶段验收。
+        拆解遵循两个月周期，按“基础搭建、核心开发、增强完善、上线交付”四段推进。
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>阶段里程碑</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 16%;">阶段</th>
+            <th style="width: 16%;">时间</th>
+            <th style="width: 26%;">目标</th>
+            <th style="width: 22%;">主要输出</th>
+            <th style="width: 20%;">里程碑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>阶段一</td>
+            <td>第1-2周</td>
+            <td>完成规划冻结、页面梳理、数据与接口方案</td>
+            <td>规划文档、原型方向、数据库与接口草案</td>
+            <td>M1 需求冻结</td>
+          </tr>
+          <tr>
+            <td>阶段二</td>
+            <td>第3-4周</td>
+            <td>完成前后端基础架构和后台骨架，并冻结原型与技术方案</td>
+            <td>项目工程、登录权限、菜单、文件上传、基础配置、冻结版方案</td>
+            <td>M2 方案冻结</td>
+          </tr>
+          <tr>
+            <td>阶段三</td>
+            <td>第5-6周</td>
+            <td>完成前台核心页面与后台核心管理模块</td>
+            <td>首页、关于、产品、方案、询盘、招聘、后台内容模块</td>
+            <td>M3 核心业务闭环完成</td>
+          </tr>
+          <tr>
+            <td>阶段四</td>
+            <td>第7-8周</td>
+            <td>完成联调、内容录入、测试、优化和上线</td>
+            <td>完整站点、后台运营能力、上线部署</td>
+            <td>M4 正式上线交付</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>前端任务拆解</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">任务分类</th>
+            <th style="width: 34%;">任务内容</th>
+            <th style="width: 16%;">优先级</th>
+            <th style="width: 16%;">依赖</th>
+            <th style="width: 16%;">阶段</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>工程搭建</td>
+            <td>Nuxt 3 官网工程初始化、路由、国际化结构、SSR 数据获取、公共布局与请求封装</td>
+            <td>P0</td>
+            <td>技术方案确认</td>
+            <td>第3周</td>
+          </tr>
+          <tr>
+            <td>公共能力</td>
+            <td>顶部导航、页脚、语言切换、独立语言 URL、SEO 基础结构、响应式布局、公共组件</td>
+            <td>P0</td>
+            <td>页面结构说明</td>
+            <td>第3-4周</td>
+          </tr>
+          <tr>
+            <td>核心页面</td>
+            <td>首页、关于我们、产品中心、解决方案、联系我们、招贤纳士</td>
+            <td>P0</td>
+            <td>接口可用、设计稿可用</td>
+            <td>第5-6周</td>
+          </tr>
+          <tr>
+            <td>增强页面</td>
+            <td>成功案例、工厂展示、新闻资讯、技术支持、视频中心</td>
+            <td>P1</td>
+            <td>内容和素材到位</td>
+            <td>第6-7周</td>
+          </tr>
+          <tr>
+            <td>表单链路</td>
+            <td>询盘提交、简历投递、成功反馈、错误提示、附件上传</td>
+            <td>P0</td>
+            <td>后台接口</td>
+            <td>第5-6周</td>
+          </tr>
+          <tr>
+            <td>联调优化</td>
+            <td>接口联调、移动端兼容、样式细节、加载性能、SEO 检查</td>
+            <td>P0</td>
+            <td>前后端联调</td>
+            <td>第7-8周</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>后端任务拆解</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">任务分类</th>
+            <th style="width: 34%;">任务内容</th>
+            <th style="width: 16%;">优先级</th>
+            <th style="width: 16%;">依赖</th>
+            <th style="width: 16%;">阶段</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>工程搭建</td>
+            <td>Spring Boot 基础项目、数据库连接、Redis、日志、异常处理、统一响应体</td>
+            <td>P0</td>
+            <td>数据库与接口草案</td>
+            <td>第3周</td>
+          </tr>
+          <tr>
+            <td>认证权限</td>
+            <td>登录、登出、JWT 或 Session、角色菜单权限、接口鉴权</td>
+            <td>P0</td>
+            <td>后台菜单与权限说明</td>
+            <td>第3-4周</td>
+          </tr>
+          <tr>
+            <td>内容管理接口</td>
+            <td>站点配置、Banner、关于我们、产品、方案、案例、新闻、视频、技术支持接口</td>
+            <td>P0</td>
+            <td>数据库设计</td>
+            <td>第4-6周</td>
+          </tr>
+          <tr>
+            <td>线索接口</td>
+            <td>询盘提交、询盘管理、岗位管理、简历投递、简历管理接口</td>
+            <td>P0</td>
+            <td>文件上传能力</td>
+            <td>第5-6周</td>
+          </tr>
+          <tr>
+            <td>文件中心</td>
+            <td>文件上传、文件元数据、引用管理、访问地址返回</td>
+            <td>P0</td>
+            <td>存储方案</td>
+            <td>第4周</td>
+          </tr>
+          <tr>
+            <td>联调与优化</td>
+            <td>接口联调、权限验证、参数校验、异常场景处理、部署配置</td>
+            <td>P0</td>
+            <td>前端联调</td>
+            <td>第7-8周</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>后台管理端任务拆解</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">任务分类</th>
+            <th style="width: 34%;">任务内容</th>
+            <th style="width: 16%;">优先级</th>
+            <th style="width: 16%;">依赖</th>
+            <th style="width: 16%;">阶段</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>后台框架</td>
+            <td>后台 Vue 工程、登录页、主布局、菜单、权限路由、基础表格与表单组件</td>
+            <td>P0</td>
+            <td>接口鉴权可用</td>
+            <td>第3-4周</td>
+          </tr>
+          <tr>
+            <td>内容管理页</td>
+            <td>产品、方案、案例、新闻、技术支持、单页内容、Banner 等后台页面</td>
+            <td>P0</td>
+            <td>后台管理接口</td>
+            <td>第4-6周</td>
+          </tr>
+          <tr>
+            <td>线索管理页</td>
+            <td>询盘列表、询盘详情、状态更新、简历列表、简历详情、岗位管理</td>
+            <td>P0</td>
+            <td>线索接口</td>
+            <td>第5-6周</td>
+          </tr>
+          <tr>
+            <td>系统管理页</td>
+            <td>账号管理、角色管理、菜单权限、站点配置、SEO 配置</td>
+            <td>P1</td>
+            <td>权限接口</td>
+            <td>第6-7周</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>关键依赖与风险</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">项</th>
+            <th style="width: 40%;">说明</th>
+            <th style="width: 20%;">影响阶段</th>
+            <th style="width: 18%;">建议</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>文案与素材</td>
+            <td>案例、工厂图片、证书、视频、岗位内容不足会影响中后期页面完成度。</td>
+            <td>第5-8周</td>
+            <td>第2周开始同步收集</td>
+          </tr>
+          <tr>
+            <td>多语言内容</td>
+            <td>英文内容准备不及时会影响国际版上线。</td>
+            <td>第6-8周</td>
+            <td>先做字段结构，内容可分批录入</td>
+          </tr>
+          <tr>
+            <td>案例公开限制</td>
+            <td>客户名称和图片可能受保密限制。</td>
+            <td>第5-8周</td>
+            <td>准备匿名案例方案</td>
+          </tr>
+          <tr>
+            <td>SEO 方案</td>
+            <td>如果前端渲染模式不利于 SEO，后期补救成本高。</td>
+            <td>第3-4周</td>
+            <td>尽早与前端架构一起确定</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="note">
+      这份任务拆解已经可以作为项目推进清单使用，并且已与数据库、接口、测试、部署等执行文档形成配套。
+      审核时建议重点确认阶段边界、任务归属和对内容准备工作的并行要求是否合理。
+    </div>
+  </div>
+</body>
+</html>
